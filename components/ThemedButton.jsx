@@ -13,7 +13,7 @@ function ThemedButton({ style, ...props}) {
 
 export default ThemedButton
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     btn:{
         backgroundColor: Colors.primary,
         padding: 10,
