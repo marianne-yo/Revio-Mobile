@@ -11,38 +11,49 @@ export default function DashboardLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: theme.navBackground, paddingTop: 10, height: 90 },
-        tabBarActiveTintColor: theme.iconColourFocused,
-        tabBarInactiveTintColor: theme.iconColour,
+        tabBarStyle: { backgroundColor: theme.navBackground, paddingTop: 10, height: 80 },
+        tabBarActiveTintColor: theme.iconColorFocused,
+        tabBarInactiveTintColor: theme.iconColor,
+        tabBarShowLabel: false
       }}
     >
       <Tabs.Screen 
-        name="profile"
-        options={{ title: "Profile", tabBarIcon: ({ focused }) => (
+        name="Library"
+        options={{ tabBarIcon: ({ focused }) => (
           <Ionicons 
             size={24} 
-            name={focused ? 'person': 'person-outline'} 
-            color={focused ? theme.iconColourFocused : theme.iconColour} 
+            name={focused ? 'folder-open': 'folder-outline'} 
+            color={focused ? theme.iconColorFocused : theme.iconColor} 
           />
         )}}
       />
       <Tabs.Screen 
-        name="books"
-        options={{ title: "Books", tabBarIcon: ({ focused }) => (
+        name="Focus"
+        options={{ tabBarIcon: ({ focused }) => (
           <Ionicons 
             size={24} 
-            name={focused ? 'book': 'book-outline'} 
-            color={focused ? theme.iconColourFocused : theme.iconColour} 
+            name={focused ? 'musical-notes': 'musical-notes-outline'} 
+            color={focused ? theme.iconColorFocused : theme.iconColor} 
           />
         )}} 
       />
       <Tabs.Screen 
-        name="create"
-        options={{ title: "Create", tabBarIcon: ({ focused }) => (
+        name="StudyTools"
+        options={{ tabBarIcon: ({ focused }) => (
           <Ionicons 
             size={24} 
-            name={focused ? 'create': 'create-outline'} 
-            color={focused ? theme.iconColourFocused : theme.iconColour} 
+            name={focused ? 'add-circle': 'add-circle-outline'} 
+            color={focused ? theme.iconColorFocused : theme.iconColor} 
+          />
+        )}} 
+      />
+      <Tabs.Screen 
+        name="Settings"
+        options={{ tabBarIcon: ({ focused }) => (
+          <Ionicons 
+            size={24} 
+            name={focused ? 'settings': 'settings-outline'} 
+            color={focused ? theme.iconColorFocused : theme.iconColor} 
           />
         )}} 
       />
