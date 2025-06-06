@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     borderColor: '#565656',
     borderRadius: 7,
     borderWidth: 1,
+    color: '##2E2E40'
   },
   STbtnText:{
     fontSize: 14,
