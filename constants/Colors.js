@@ -13,7 +13,9 @@ export const Colors = {
         txtInputBorder: '#9E9E9E',
         placeholderColor: '#7C7C7C',
         secondaryBtnColor: '#12121A',
-        secondaryBtnBorrder: '#B1B1B1'
+        secondaryBtnBorrder: '#B1B1B1',
+        studyToolsBtnColor:'#2E2E40',
+        studyToolsBtnBorder: '#565656'
     },
     light: {
         text: '#200448',
@@ -26,6 +28,8 @@ export const Colors = {
         txtInputBorder: '#D1CFD1',
         placeholderColor: '#0A0909',
         secondaryBtnColor: '#F8F6FA',
-        secondaryBtnBorrder: '#B5B5FF'
+        secondaryBtnBorrder: '#B5B5FF',
+        studyToolsBtnColor:'#F0F0FF',
+        studyToolsBtnBorder: '#200448'
     }
 }
