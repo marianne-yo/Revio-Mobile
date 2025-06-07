@@ -120,7 +120,7 @@ const StudyTools = () => {
         onPress={() => router.push("/(reviewer)/SumAIUpload")}
         style={[{
           borderRadius: 7, 
-          borderColor:"#B5B5BFF",
+          borderColor:"#B5B5FF",
           borderWidth: 1 , 
           backgroundColor:'#2E2E40',
           width: '100%',
