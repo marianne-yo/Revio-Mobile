@@ -47,6 +47,15 @@ const Settings = () => {
 
       </ThemedView>
 
+      <ThemedButton>
+        <ThemedText>Logout</ThemedText>
+      </ThemedButton>
+
+      <ThemedButton>
+        <ThemedText>Delete Account</ThemedText>
+      </ThemedButton>
+
+
     
     </ThemedView>
   )

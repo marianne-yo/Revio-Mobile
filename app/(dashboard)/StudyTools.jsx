@@ -12,7 +12,11 @@ import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
 
+import { useRouter } from 'expo-router';
+
 const StudyTools = () => {
+  const router = useRouter();
+
   return (
     <ThemedView style={styles.container}>
         
@@ -38,18 +42,22 @@ const StudyTools = () => {
         Using mnemonics helps you memorize faster
       </ThemedText>
 
-      <ThemedButton style={[{
-        borderRadius: 7, 
-        borderColor:"#565656",
-        borderWidth: 1 , 
-        backgroundColor:'#2E2E40',
-        width: '100%',
-        padding: 15
-        }]}>
+      <ThemedButton 
+        onPress={() => router.push("/(flashcards)/AcronymUpload")}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#565656",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
         <ThemedText style={styles.STbtnText}>
           Acronym Mnemonics
         </ThemedText>
       </ThemedButton>
+
 
       <Spacer height={10}/>
 
@@ -58,20 +66,23 @@ const StudyTools = () => {
       >
         Utilize using Leitner technique in studying
       </ThemedText>
-      <ThemedButton style={[{
-        borderRadius: 7, 
-        borderColor:"#565656",
-        borderWidth: 1 , 
-        backgroundColor:'#2E2E40',
-        width: '100%',
-        padding: 15
-        }]}>
+      <ThemedButton 
+        onPress={() => router.push("/(flashcards)/TDUpload")}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#565656",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
         <ThemedText style={styles.STbtnText}>
           Terms and Definitions
         </ThemedText>
       </ThemedButton>
 
-      {/* revier generator */}
+      {/* reviewer generator */}
       <Spacer height={10}/>
       <ThemedText
         style={styles.subText}
@@ -87,14 +98,17 @@ const StudyTools = () => {
         Study using a Pomodoro timer
       </ThemedText>
 
-      <ThemedButton style={[{
-        borderRadius: 7, 
-        borderColor:"#565656",
-        borderWidth: 1 , 
-        backgroundColor:'#2E2E40',
-        width: '100%',
-        padding: 15
-        }]}>
+      <ThemedButton 
+        onPress={() => router.push("/(reviewer)/StandardUpload")}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#565656",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
         <ThemedText style={styles.STbtnText}>
           Standard Summarization
         </ThemedText>
@@ -102,16 +116,17 @@ const StudyTools = () => {
 
       <Spacer height={1}/>
 
-      <ThemedButton style={[{
-        borderRadius: 7, 
-        borderColor:"#B5B5FF",
-        borderWidth: 1 , 
-        backgroundColor:'#2E2E40',
-        width: '100%',
-        padding: 15,
-        alignItems: 'center',
-        justifyContent: 'center'
-        }]}>
+      <ThemedButton 
+        onPress={() => router.push("/(reviewer)/SumAIUpload")}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#B5B5BFF",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
         <ThemedText style={styles.STbtnText}>
           Summarization <Ionicons name='add' size={18} />  AI Explanation
         </ThemedText>
@@ -160,7 +175,7 @@ const styles = StyleSheet.create({
   },
   STbtnText:{
     fontSize: 14,
-    fontWeight: 'medium',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#ffffff'
   }
 })
