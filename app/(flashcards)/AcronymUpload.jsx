@@ -92,6 +92,49 @@ const AcronymUpload = () => {
       </ThemedButton>
       <ThemedText style={styles.uploadSmallText}>Please upload a  file with .docx , .pdf , .ppt</ThemedText>
       </View>
+
+      <ThemedButton onPress={() => router.push("/LoadingScreen")}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#B5B5FF",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
+        <ThemedText >Loading Screen</ThemedText>
+
+      </ThemedButton>
+
+      <ThemedButton onPress={() => router.push('/ACFlashcardsResult')}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#B5B5FF",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
+        <ThemedText >Results</ThemedText>
+
+      </ThemedButton>
+
+      <ThemedButton onPress={() => router.push('/ACFlashcardsEditor')}
+        style={[{
+          borderRadius: 7, 
+          borderColor:"#B5B5FF",
+          borderWidth: 1 , 
+          backgroundColor:'#2E2E40',
+          width: '100%',
+          padding: 15
+        }]}
+      >
+        <ThemedText >Editor</ThemedText>
+
+      </ThemedButton>
+
     </ThemedView>
   );
 };
@@ -118,14 +161,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   uploadContainer: {
-  backgroundColor: '#2E2E40',
-  borderColor: '#565656',
-  borderWidth: 1,
-  borderRadius: 7,
-  width: '100%',
-  paddingVertical: 20,
-  justifyContent: 'center',
-  alignItems: 'center' // ✅ this is the fix
+    backgroundColor: '#2E2E40',
+    borderColor: '#565656',
+    borderWidth: 1,
+    borderRadius: 7,
+    width: '100%',
+    paddingVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center' // ✅ this is the fix
   },
   uploadSmallText:{
     fontSize: 10,
