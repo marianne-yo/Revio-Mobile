@@ -1,70 +1,66 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
-//icon imports
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 
-import ThemedView from '../../components/ThemedView'
-import Spacer from '../../components/Spacer'
-import ThemedText from '../../components/ThemedText'
-import Separator from '../../components/Separator'
-
-
-import { useRouter } from 'expo-router'
-import useCustomFonts from '../../hooks/useCustomFonts'
+import ThemedView from '../../components/ThemedView';
+import Spacer from '../../components/Spacer';
+import ThemedText from '../../components/ThemedText';
+import Separator from '../../components/Separator';
+import useCustomFonts from '../../hooks/useCustomFonts';
 
 const SignupSuccess = () => {
-    const [fontsLoaded] = useCustomFonts();
-    if (!fontsLoaded) return null;
+  const [fontsLoaded] = useCustomFonts();
+  const router = useRouter();
+  const { username } = useLocalSearchParams();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace('/Login'); // redirect after 5s
+    }, 5000);
+
+    return () => clearTimeout(timer); // cleanup
+  }, []);
+
+  if (!fontsLoaded) return null;
 
   return (
     <ThemedView style={styles.container}>
-        <Ionicons name='checkmark-circle' size={125}
-            style={styles.icon}
-        />
-        <ThemedText style={styles.title}>
-            Account Created Successfully!
-        </ThemedText>
-        
-        <ThemedText style={styles.subText}>
-            Welcome, user
-        </ThemedText>
+      <Ionicons name="checkmark-circle" size={125} style={styles.icon} />
+      <ThemedText style={styles.title}>Account Created Successfully!</ThemedText>
+      <ThemedText style={styles.subText}>
+        Welcome, {username ?? 'user'} {/* fallback if no username */}
+      </ThemedText>
     </ThemedView>
-  )
-}
+  );
+};
 
-export default SignupSuccess
+export default SignupSuccess;
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  title:{
-    textAlign:'center',
+  title: {
+    textAlign: 'center',
     fontSize: 32,
     margin: 10,
     marginBottom: 5,
     fontFamily: 'Poppins-SemiBold',
-    alignSelf:'center',
-    paddingHorizontal: 30
+    alignSelf: 'center',
+    paddingHorizontal: 30,
   },
-  subText:{
-    textAlign:'center',
+  subText: {
+    textAlign: 'center',
     fontSize: 20,
     margin: 10,
     fontFamily: 'Poppins-Regular',
-    alignSelf:'center',
-    paddingHorizontal: 30
+    alignSelf: 'center',
+    paddingHorizontal: 30,
   },
-  buttonText: {
-    color: '#200448',
-    textAlign: 'center',
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold'
+  icon: {
+    color: '#87FF66',
   },
-  icon:{
-    color: '#87FF66'
-  }
-})
+});

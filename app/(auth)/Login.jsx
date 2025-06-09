@@ -29,7 +29,6 @@ import useCustomFonts from '../../hooks/useCustomFonts'
 const Login = () => {
     const [fontsLoaded] = useCustomFonts();
 
-    // ✅ Always call all hooks
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();

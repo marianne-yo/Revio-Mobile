@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Alert } from 'react-native'
 import React from 'react'
 
 import ThemedView from '../../components/ThemedView'
@@ -12,8 +12,11 @@ import Separator from '../../components/Separator'
 import useCustomFonts from '../../hooks/useCustomFonts'
 
 import { signOut } from 'firebase/auth'
-import { auth } from '../../lib/firebaseConfig'; // make sure this path is correct
+import { auth, db } from '../../lib/firebaseConfig'; // make sure this path is correct
 import { useRouter } from 'expo-router';
+import { deleteUser } from 'firebase/auth';
+import { doc, deleteDoc } from 'firebase/firestore';
+
 
 const router = useRouter();
 
@@ -21,17 +24,58 @@ const router = useRouter();
 const Settings = () => {
   const [fontsLoaded] = useCustomFonts();
   
-  if (!fontsLoaded) return null; // prevent flashing default font
+  if (!fontsLoaded) return null;
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      router.replace('/Login'); // or router.push('/Login') if you want to allow back nav
+      router.replace('/Login');
     } catch (error) {
       console.error('Logout Error:', error);
       Alert.alert('Logout Failed', 'Something went wrong while logging out.');
     }
   };
+
+  const handleDeleteAccount = async () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to permanently delete your account?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Yes, Delete",
+          style: "destructive",
+          onPress: async () => {
+            const user = auth.currentUser;
+
+            if (user) {
+              try {
+                await deleteUser(user);
+                Alert.alert("Account Deleted", "Your account has been deleted.");
+                router.replace('/Login');
+              } catch (error) {
+                console.error("Delete Account Error:", error);
+
+                if (error.code === "auth/requires-recent-login") {
+                  Alert.alert(
+                    "Re-authentication Required",
+                    "Please log in again to delete your account."
+                  );
+                  router.replace('/Login');
+                } else {
+                  Alert.alert("Error", "Could not delete account.");
+                }
+              }
+            }
+          }
+        }
+      ]
+    );
+  };
+
 
   return (
     <ThemedView style={styles.container}>
@@ -74,10 +118,12 @@ const Settings = () => {
         <ThemedText style={styles.logoutTxt}>Logout</ThemedText>
       </ThemedButton>
 
-      <ThemedButton style={styles.deleteBtn}>
+      {/* Their document in users/{uid} from Firestore
+      Their Firebase Auth account */}
+      <ThemedButton style={styles.deleteBtn} onPress={handleDeleteAccount}>
         <ThemedText style={styles.deleteTxt}>Delete Account</ThemedText>
       </ThemedButton>
-    
+
     </ThemedView>
   )
 }
