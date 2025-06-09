@@ -2,25 +2,18 @@
 import { View, TextInput, useColorScheme, StyleSheet } from 'react-native';
 import React from 'react';
 import { Colors } from '../constants/Colors';
-import { Poppins_100Thin, Poppins_300Light, Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_600SemiBold_Italic, Poppins_700Bold, Poppins_900Black, useFonts } from '@expo-google-fonts/poppins';
+import useCustomFonts from '../hooks/useCustomFonts'
 
 const ThemedTextInput = ({ style, rightIcon, ...props }) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
 
-  const [fontsLoaded] = useFonts({
-          Poppins_400Regular,
-          Poppins_500Medium,
-          Poppins_100Thin,
-          Poppins_600SemiBold_Italic,
-          Poppins_900Black,
-          Poppins_700Bold,
-          Poppins_300Light
-      })
+  const [fontsLoaded] = useCustomFonts();
+  if (!fontsLoaded) return null; // prevent flashing default font
   return (
     <View style={[styles.inputWrapper, { backgroundColor: theme.txtInputColor, borderColor: theme.txtInputBorder }, style]}>
       <TextInput
-        style={[styles.input, { color: theme.text, fontFamily: 'Poppins_300Light' }]}
+        style={[styles.input, { color: theme.text}]}
         placeholderTextColor={theme.placeholderColor ?? '#aaa'}
         {...props}
       />
@@ -39,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 15,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     paddingVertical: 8,
     justifyContent:'center',
     alignContent: 'center'
@@ -47,9 +40,9 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
-    fontFamily: 'Poppins_300Light',
-    paddingVertical: 5,     // ✅ adjust this for vertical alignment
-    textAlignVertical: 'center', // ✅ fixes Android vertical alignment
+    fontFamily: 'Poppins-Light',
+    paddingVertical: 5,     
+    textAlignVertical: 'center', 
   },
 
   iconWrapper: {
