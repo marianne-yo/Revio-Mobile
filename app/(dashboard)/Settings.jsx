@@ -11,10 +11,28 @@ import Separator from '../../components/Separator'
 
 import useCustomFonts from '../../hooks/useCustomFonts'
 
+import { signOut } from 'firebase/auth'
+import { auth } from '../../lib/firebaseConfig'; // make sure this path is correct
+import { useRouter } from 'expo-router';
+
+const router = useRouter();
+
+
 const Settings = () => {
-    const [fontsLoaded] = useCustomFonts();
+  const [fontsLoaded] = useCustomFonts();
   
-    if (!fontsLoaded) return null; // prevent flashing default font
+  if (!fontsLoaded) return null; // prevent flashing default font
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.replace('/Login'); // or router.push('/Login') if you want to allow back nav
+    } catch (error) {
+      console.error('Logout Error:', error);
+      Alert.alert('Logout Failed', 'Something went wrong while logging out.');
+    }
+  };
+
   return (
     <ThemedView style={styles.container}>
         
@@ -52,7 +70,7 @@ const Settings = () => {
 
       <Spacer height={20}/>
 
-      <ThemedButton style={styles.logoutBtn}>
+      <ThemedButton style={styles.logoutBtn} onPress={handleLogout}>
         <ThemedText style={styles.logoutTxt}>Logout</ThemedText>
       </ThemedButton>
 
