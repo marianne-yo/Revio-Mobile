@@ -13,9 +13,12 @@ import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
 
 import { useRouter } from 'expo-router';
+import useCustomFonts from '../../hooks/useCustomFonts'
 
 const StudyTools = () => {
   const router = useRouter();
+  const [fontsLoaded] = useCustomFonts();
+  if (!fontsLoaded) return null; // prevent flashing default font
 
   return (
     <ThemedView style={styles.container}>

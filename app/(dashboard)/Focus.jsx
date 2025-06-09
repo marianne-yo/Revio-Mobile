@@ -6,10 +6,7 @@ import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
-
 
 const Focus = () => {
   return (
@@ -20,7 +17,6 @@ const Focus = () => {
       >
         Focus
       </ThemedText>
-
     
     </ThemedView>
   )

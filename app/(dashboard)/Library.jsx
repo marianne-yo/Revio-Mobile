@@ -6,11 +6,8 @@ import { useNavigation } from '@react-navigation/native'
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
-import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
 import useCustomFonts from '../../hooks/useCustomFonts'
 
@@ -72,10 +69,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold'
   },
   separator: {
-    // borderBottomColor: '#cccccc',
     borderBottomWidth: StyleSheet.hairlineWidth,
     width: '100%',
-    // marginVertical: 10,
   },
   header: {
     fontSize: 28,
@@ -84,13 +79,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   folderList: {
-    // paddingBottom: 20,
     width: '100%',
   },
   folder: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: '#1A1A2E',
     borderBottomColor: '#959393',
     borderBottomWidth: 0.5,
     padding: 15,

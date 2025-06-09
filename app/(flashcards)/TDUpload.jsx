@@ -9,30 +9,16 @@ import { Alert } from 'react-native';
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
-import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
-import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
-import { useFonts } from '@expo-google-fonts/poppins';
 import React from 'react';
 
-import { Poppins_100Thin, Poppins_400Regular, Poppins_500Medium, 
-  Poppins_600SemiBold, Poppins_600SemiBold_Italic, 
-  Poppins_700Bold, Poppins_900Black } from '@expo-google-fonts/poppins';
+import useCustomFonts from '../../hooks/useCustomFonts'
 
 const TDUpload = () => {
     const router = useRouter();
-    const [fontsLoaded] = useFonts({
-            Poppins_400Regular,
-            Poppins_500Medium,
-            Poppins_100Thin,
-            Poppins_600SemiBold_Italic,
-            Poppins_900Black,
-            Poppins_700Bold,
-            Poppins_600SemiBold
-    })
+    const [fontsLoaded] = useCustomFonts();
+    if (!fontsLoaded) return null; // prevent flashing default font
     const handleFileUpload = async () => {
         try {
         const result = await DocumentPicker.getDocumentAsync({
@@ -105,7 +91,7 @@ const styles = StyleSheet.create({
   },
   title:{
     fontSize: 36,
-    fontFamily: 'Poppins_700Bold',
+    fontFamily: 'Poppins-Bold',
     
   },
   separator: {
@@ -122,11 +108,11 @@ const styles = StyleSheet.create({
   width: '100%',
   paddingVertical: 20,
   justifyContent: 'center',
-  alignItems: 'center' // ✅ this is the fix
+  alignItems: 'center'
   },
   uploadSmallText:{
     fontSize: 10,
-    fontFamily: 'Poppins_300Light',
+    fontFamily: 'Poppins-Light',
     fontStyle: 'italic',
     color: '#d3d3d3'
   },
@@ -146,8 +132,6 @@ const styles = StyleSheet.create({
   },
   desc:{
     fontSize: 12,
-    fontFamily: 'Poppins_400Regular'
+    fontFamily: 'Poppins-Regular'
   }
-
-
 })

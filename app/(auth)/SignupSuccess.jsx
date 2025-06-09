@@ -7,11 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
-import ThemedTextInput from '../../components/ThemedTextInput'
-import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
+
 
 import { useRouter } from 'expo-router'
 import useCustomFonts from '../../hooks/useCustomFonts'

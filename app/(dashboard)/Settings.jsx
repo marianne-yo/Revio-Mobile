@@ -8,10 +8,13 @@ import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
 import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
+import useCustomFonts from '../../hooks/useCustomFonts'
 
 const Settings = () => {
+    const [fontsLoaded] = useCustomFonts();
+  
+    if (!fontsLoaded) return null; // prevent flashing default font
   return (
     <ThemedView style={styles.container}>
         
