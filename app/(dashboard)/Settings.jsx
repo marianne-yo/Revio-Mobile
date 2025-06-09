@@ -50,15 +50,15 @@ const Settings = () => {
 
       </ThemedView>
 
-      <ThemedButton>
-        <ThemedText>Logout</ThemedText>
+      <Spacer height={20}/>
+
+      <ThemedButton style={styles.logoutBtn}>
+        <ThemedText style={styles.logoutTxt}>Logout</ThemedText>
       </ThemedButton>
 
-      <ThemedButton>
-        <ThemedText>Delete Account</ThemedText>
+      <ThemedButton style={styles.deleteBtn}>
+        <ThemedText style={styles.deleteTxt}>Delete Account</ThemedText>
       </ThemedButton>
-
-
     
     </ThemedView>
   )
@@ -110,5 +110,26 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'medium',
     textAlign: 'center'
+  },
+  deleteBtn:{
+    backgroundColor: '#CD3232',
+    width: '100%',
+    justifyContent: 'center',
+    borderRadius: 7
+  },
+  deleteTxt:{
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'Poppins-Bold',
+  },
+  logoutBtn:{
+    width: '100%',
+    justifyContent: 'center',
+    borderRadius: 7
+  },
+  logoutTxt:{
+    color: '#200448',
+    textAlign: 'center',
+    fontFamily: 'Poppins-Bold',
   }
 })
