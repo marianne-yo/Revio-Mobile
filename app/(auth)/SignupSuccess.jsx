@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
+//icon imports
+import { Ionicons } from '@expo/vector-icons';
+
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
@@ -10,47 +13,30 @@ import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
-import useCustomFonts from '../../hooks/useCustomFonts'
 import { useRouter } from 'expo-router'
+import useCustomFonts from '../../hooks/useCustomFonts'
 
+const SignupSuccess = () => {
+    const [fontsLoaded] = useCustomFonts();
+    if (!fontsLoaded) return null;
 
-const ForgotPass = () => {
-  const [fontsLoaded] = useCustomFonts();
-  const router = useRouter()
-
-  const handlTemporaryPress = () => {
-    router.push('/ResetPass')
-  }
-  if (!fontsLoaded) return null;
-  
   return (
     <ThemedView style={styles.container}>
-      <ThemedText style={styles.title}>
-        Reset Password
-      </ThemedText>
-      <ThemedText style={styles.subText}>Email</ThemedText>
-      
-      <ThemedTextInput 
-        style={{ width: '80%', marginBottom: 20 }}
-        placeholder="Email"
-        // onChangeText={setEmailOrUsername}
-        // value={emailOrUsername}
-      />
-
-      <ThemedButton style={{borderRadius: 10}}>
-        <Text style={styles.buttonText}>Send Email</Text>
-      </ThemedButton>
-
-      <ThemedButton style={{borderRadius: 10}} onPress={handlTemporaryPress}
-      >
-        <Text style={styles.buttonText}>Temporary</Text>
-      </ThemedButton>
-
+        <Ionicons name='checkmark-circle' size={125}
+            style={styles.icon}
+        />
+        <ThemedText style={styles.title}>
+            Account Created Successfully!
+        </ThemedText>
+        
+        <ThemedText style={styles.subText}>
+            Welcome, user
+        </ThemedText>
     </ThemedView>
   )
 }
 
-export default ForgotPass
+export default SignupSuccess
 
 const styles = StyleSheet.create({
   container:{
@@ -59,20 +45,20 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title:{
-    textAlign:'left',
+    textAlign:'center',
     fontSize: 32,
     margin: 10,
     marginBottom: 5,
     fontFamily: 'Poppins-SemiBold',
-    alignSelf:'flex-start',
+    alignSelf:'center',
     paddingHorizontal: 30
   },
   subText:{
-    textAlign:'left',
+    textAlign:'center',
     fontSize: 20,
     margin: 10,
     fontFamily: 'Poppins-Regular',
-    alignSelf:'flex-start',
+    alignSelf:'center',
     paddingHorizontal: 30
   },
   buttonText: {
@@ -81,4 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Bold'
   },
+  icon:{
+    color: '#87FF66'
+  }
 })

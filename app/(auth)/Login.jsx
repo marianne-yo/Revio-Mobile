@@ -24,24 +24,19 @@ import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
-import { Poppins_100Thin, Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_600SemiBold_Italic, Poppins_700Bold, Poppins_900Black, useFonts } from '@expo-google-fonts/poppins';
+import useCustomFonts from '../../hooks/useCustomFonts'
 
 const Login = () => {
-    const [fontsLoaded] = useFonts({
-        Poppins_400Regular,
-        Poppins_500Medium,
-        Poppins_100Thin,
-        Poppins_600SemiBold_Italic,
-        Poppins_900Black,
-        Poppins_700Bold,
-        Poppins_600SemiBold
-    })
+    const [fontsLoaded] = useCustomFonts();
+
+    // ✅ Always call all hooks
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-
     const [showPassword, setShowPassword] = useState(false);
     const [unverifiedUser, setUnverifiedUser] = useState(null);
+
+     if (!fontsLoaded) return null;
 
 
     const handleSubmit = async () => {
@@ -105,13 +100,13 @@ const Login = () => {
                         </ThemedText>
 
                         <ThemedTextInput 
-                                style={{ width: '80%', marginBottom: 20 }}
-                                placeholder="Email or Username"
-                                onChangeText={setEmailOrUsername}
-                                value={emailOrUsername}
-                            />
+                            style={{ width: '80%', marginBottom: 20 }}
+                            placeholder="Email or Username"
+                            onChangeText={setEmailOrUsername}
+                            value={emailOrUsername}
+                        />
 
-                            <ThemedTextInput 
+                        <ThemedTextInput 
                             style={{ width: '80%', marginBottom: 20 }}
                             placeholder="Password"
                             onChangeText={setPassword}
@@ -125,13 +120,17 @@ const Login = () => {
                                 onPress={() => setShowPassword(prev => !prev)} 
                                 />
                             }
-                            />
+                        />
 
-                            <ThemedButton onPress={handleSubmit}>
-                                <Text style={styles.buttonText}>Login</Text>
-                            </ThemedButton>
+                        <ThemedButton onPress={handleSubmit}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </ThemedButton>
 
-                            {unverifiedUser && (
+                        <Link href='/ForgotPass' style={styles.link}>
+                            <ThemedText style={styles.forgotPassText}>Forgot Password?</ThemedText>
+                        </Link>
+
+                        {unverifiedUser && (
                             <ThemedButton
                                 onPress={async () => {
                                 try {
@@ -146,15 +145,12 @@ const Login = () => {
                             >
                                 <Text style={styles.buttonText}>Resend Verification Email</Text>
                             </ThemedButton>
-                            )}
-
-
-                        <Link href='/ForgotPass' style={styles.link}>
-                            <ThemedText>Forgot Password?</ThemedText>
-                        </Link>
+                        )}
 
                         <Separator />
+                        <Spacer height={20}/>
 
+                        <ThemedText style={styles.noAccText}> No account yet? </ThemedText>
                         <ThemedSecondaryButton onPress={() => router.push('/Signup')}>
                             {(pressed) => (
                                 <Text style={{
@@ -162,12 +158,14 @@ const Login = () => {
                                     textAlign: 'center',
                                     justifyContent: 'center',
                                     fontSize: 14,
-                                    fontFamily: 'Poppins_600SemiBold',
+                                    fontFamily: 'Poppins-SemiBold',
                                 }}>
                                     Signup
                                 </Text>
                             )}
                         </ThemedSecondaryButton>
+
+                        
                     </ThemedView>
             </ScrollView>
         </TouchableWithoutFeedback>
@@ -187,7 +185,7 @@ const styles = StyleSheet.create({
         textAlign:'left',
         fontSize: 48,
         marginBottom: 10,
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: 'Poppins-Bold',
         alignSelf:'flex-start',
         paddingHorizontal: 40
     },
@@ -196,17 +194,24 @@ const styles = StyleSheet.create({
         height: 170
     },
     link:{
-        fontSize: 10,
-        fontWeight: 'medium',
-        padding: 20,
-        color: '#C7E1FF'
+        // fontSize: 10,
+        // fontFamily: 'Poppins-Medium',
+        padding: 10,
 
     },
     buttonText: {
         color: '#200448',
         textAlign: 'center',
         fontSize: 14,
-        // fontWeight: '600',
-        fontFamily: 'Poppins_700Bold',
+        fontFamily: 'Poppins-SemiBold'
+    },
+    noAccText:{
+        fontSize: 10,
+        fontFamily: 'Poppins-ExtraLight'
+    },
+    forgotPassText:{
+        fontSize: 10,
+        fontFamily: 'Poppins-Light',
+        color: '#7FB8F9',
     }
 })

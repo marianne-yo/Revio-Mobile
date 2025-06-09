@@ -37,6 +37,9 @@ const Signup = () => {
 
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handlTemporarySuc = () => {
+        router.push('/SignupSuccess')
+    }
     // Basic regex for email
     const isValidEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -272,13 +275,13 @@ const Signup = () => {
 
 
                     <ThemedButton style={{ borderRadius: 10 }} onPress={handleSubmit}>
-                    <ThemedText bold style={{
-                        color: '#200448',
-                        textAlign: 'center',
-                        fontSize: 14,
-                    }}>
-                        Sign Up
-                    </ThemedText>
+                        <ThemedText bold style={{
+                            color: '#200448',
+                            textAlign: 'center',
+                            fontSize: 14,
+                        }}>
+                            Sign Up
+                        </ThemedText>
                     </ThemedButton>
 
 
@@ -288,6 +291,15 @@ const Signup = () => {
                         <ThemedText style={styles.link}>Back to login</ThemedText>
                     </Link>
 
+                    <ThemedButton style={{ borderRadius: 10 }} onPress={handlTemporarySuc}>
+                        <ThemedText bold style={{
+                            color: '#200448',
+                            textAlign: 'center',
+                            fontSize: 14,
+                        }}>
+                            Temporary Success
+                        </ThemedText>
+                    </ThemedButton>
 
                 </ThemedView>
             </ScrollView>

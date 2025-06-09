@@ -1,5 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+
+//icon imports
+import { Ionicons } from '@expo/vector-icons';
 
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
@@ -11,16 +14,12 @@ import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
 import useCustomFonts from '../../hooks/useCustomFonts'
-import { useRouter } from 'expo-router'
 
 
-const ForgotPass = () => {
+const ResetPass = () => {
   const [fontsLoaded] = useCustomFonts();
-  const router = useRouter()
-
-  const handlTemporaryPress = () => {
-    router.push('/ResetPass')
-  }
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   if (!fontsLoaded) return null;
   
   return (
@@ -28,29 +27,52 @@ const ForgotPass = () => {
       <ThemedText style={styles.title}>
         Reset Password
       </ThemedText>
-      <ThemedText style={styles.subText}>Email</ThemedText>
+      <ThemedText style={styles.subText}>New Password</ThemedText>
       
-      <ThemedTextInput 
-        style={{ width: '80%', marginBottom: 20 }}
-        placeholder="Email"
-        // onChangeText={setEmailOrUsername}
-        // value={emailOrUsername}
-      />
+    <ThemedTextInput
+        style={{ width: '80%', marginBottom: 20, borderRadius: 10}}
+        placeholder="Password"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry={!showPassword}
+        rightIcon={
+          <Ionicons 
+            name={showPassword ? 'eye-off' : 'eye'} 
+            size={20} 
+            color="gray" 
+            onPress={() => setShowPassword(prev => !prev)} 
+          />
+        }
+          placeholderColor='#fff'
+    />
+
+    <ThemedText style={styles.subText}>Re-enter Password</ThemedText>
+    <ThemedTextInput
+        style={{ width: '80%', marginBottom: 20, borderRadius: 10}}
+        placeholder="Password"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry={!showPassword}
+        rightIcon={
+          <Ionicons 
+            name={showPassword ? 'eye-off' : 'eye'} 
+            size={20} 
+            color="gray" 
+            onPress={() => setShowPassword(prev => !prev)} 
+          />
+        }
+          placeholderColor='#fff'
+    />
 
       <ThemedButton style={{borderRadius: 10}}>
-        <Text style={styles.buttonText}>Send Email</Text>
-      </ThemedButton>
-
-      <ThemedButton style={{borderRadius: 10}} onPress={handlTemporaryPress}
-      >
-        <Text style={styles.buttonText}>Temporary</Text>
+        <Text style={styles.buttonText}>Reset Password</Text>
       </ThemedButton>
 
     </ThemedView>
   )
 }
 
-export default ForgotPass
+export default ResetPass
 
 const styles = StyleSheet.create({
   container:{
