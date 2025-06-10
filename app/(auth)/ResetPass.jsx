@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-
 //icon imports
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,12 +8,8 @@ import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
-import Separator from '../../components/Separator'
-import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 
 import useCustomFonts from '../../hooks/useCustomFonts'
-
 
 const ResetPass = () => {
   const [fontsLoaded] = useCustomFonts();
