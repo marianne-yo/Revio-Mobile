@@ -19,7 +19,6 @@
         }
       ]
     },
-
     {
       "id": "TermsAndCondition",
       "title": "Terms and Definitions",
@@ -89,14 +88,13 @@
         }
       ]
     },
-
     {
       "id": "SummarizedReviewers",
       "title": "Summarized Reviewers",
       "Desc": "Standard and AI Summarized Reviewers",
       "reviewers": [
         {
-          "id": "s1",
+          "id": "std1",
           "title": "Web Development Reviewer",
           "sections": [
             {
@@ -122,7 +120,7 @@
           ]
         },
         {
-          "id": "s2",
+          "id": "std2",
           "title": "Agile Development Reviewer",
           "sections": [
             {
@@ -143,15 +141,35 @@
                 "Teams are self-organizing and in control of their work.",
                 "Focuses on rapid, incremental software delivery."
               ]
+            }
+          ]
+        },
+        {
+          "id": "ai1",
+          "title": "Operating System Concepts (AI Summary)",
+          "sections": [
+            {
+              "title": "Process Management",
+              "bullets": [
+                "AI: A process is a program in execution, including program counter, registers, and variables.",
+                "The OS uses process scheduling to maximize CPU usage and reduce wait times.",
+                "Multitasking involves context switching between processes."
+              ]
             },
             {
-              "title": "Agile Methodologies",
+              "title": "Memory Management",
               "bullets": [
-                "Extreme Programming (XP): User stories, refactoring, pair programming, unit testing.",
-                "Scrum: Sprints, daily stand-ups, backlog-driven work, time-boxed demos.",
-                "Crystal: Tailored to team size and project complexity.",
-                "Feature-Driven Development (FDD): Features are short, client-valued functions.",
-                "Agile Modeling: Model with purpose, stay lightweight and adaptive."
+                "AI: Memory management ensures each process has enough memory and prevents overlap.",
+                "Paging and segmentation help divide memory into manageable sections.",
+                "Virtual memory allows larger programs by using disk space as RAM overflow."
+              ]
+            },
+            {
+              "title": "File Systems",
+              "bullets": [
+                "AI: File systems store and organize data on storage devices.",
+                "Common types include FAT, NTFS, ext4.",
+                "Each file has attributes like name, type, and access permissions."
               ]
             }
           ]
