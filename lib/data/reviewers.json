@@ -1,0 +1,253 @@
+{
+  "folders":
+  [
+    {
+    "id":"TermsAndCondition" ,
+    "title":"Terms and Condition",
+    "Desc:":"Flashcards",
+    "reviewers":[
+      {
+        "id":"q1",
+        "title":"HTML Reviewer",
+        "questions":[
+           {
+        "id": "q1",
+        "question": "What does HTML stand for?",
+        "answer": "HyperText Markup Language"
+      },
+      {
+        "id": "q2",
+        "question": "Which HTML tag is used to create a hyperlink?",
+        "answer": "<a>"
+      },
+      {
+        "id": "q3",
+        "question": "Which tag is used to insert an image in HTML?",
+        "answer": "<img>"
+      },
+      {
+        "id": "q4",
+        "question": "What is the purpose of the <head> tag in HTML?",
+        "answer": "It contains metadata and links to scripts and stylesheets."
+      },
+      {
+        "id": "q5",
+        "question": "What attribute is used to provide alternative text for an image?",
+        "answer": "alt"
+      }
+        ]
+      },
+      {
+        "id":"q2",
+        "title":"CSS Reviewer",
+        "questions":[
+             {
+        "id": "q1",
+        "answer": "Cascading Style Sheets"
+      },
+      {
+        "id": "q2",
+        "question": "Which property is used to change the text color in CSS?",
+        "answer": "color"
+      },
+      {
+        "id": "q3",
+        "question": "How do you select an element with the ID 'main' in CSS?",
+        "answer": "#main"
+      },
+      {
+        "id": "q4",
+        "question": "Which CSS property controls the size of text?",
+        "answer": "font-size"
+      },
+      {
+        "id": "q5",
+        "question": "How do you make all `<p>` elements have no margin?",
+        "answer": "p { margin: 0; }"
+      }
+        ]
+      },
+      {
+      "id": "q3",
+      "title": "AgileDev Reviewer",
+      "questions": [
+        {
+          "id": "q1",
+          "question": "Agile Manifesto",
+          "answer": "A foundational document in Agile development that emphasizes values like individuals and interactions, working software, customer collaboration, and responding to change."
+        },
+        {
+          "id": "q2",
+          "question": "Agility",
+          "answer": "The ability to respond rapidly and adaptively to change through communication, collaboration, and incremental delivery."
+        },
+        {
+          "id": "q3",
+          "question": "Customer Collaboration",
+          "answer": "Continuous involvement of the customer as part of the Agile team to ensure alignment with user needs."
+        },
+        {
+          "id": "q4",
+          "question": "Working Software",
+          "answer": "The primary measure of progress in Agile, preferred over detailed documentation."
+        },
+        {
+          "id": "q5",
+          "question": "Self-Organizing Teams",
+          "answer": "Teams that manage their own work, make decisions collaboratively, and adapt to challenges independently."
+        },
+        {
+          "id": "q6",
+          "question": "Extreme Programming (XP)",
+          "answer": "An Agile methodology focused on practices like user stories, pair programming, refactoring, and continuous testing."
+        },
+        {
+          "id": "q7",
+          "question": "Project Velocity",
+          "answer": "A metric in XP that tracks the number of features delivered per iteration to help estimate future progress."
+        },
+        {
+          "id": "q8",
+          "question": "Adaptive Software Development (ASD)",
+          "answer": "An Agile approach that emphasizes mission-driven planning, component-based development, time-boxing, and learning."
+        },
+        {
+          "id": "q9",
+          "question": "Dynamic Systems Development Method (DSDM)",
+          "answer": "An Agile method focusing on active user involvement, iterative development, frequent delivery, and integrated testing."
+        },
+        {
+          "id": "q10",
+          "question": "Scrum",
+          "answer": "An Agile framework that organizes work into time-boxed sprints, with regular demos and a product backlog."
+        },
+        {
+          "id": "q11",
+          "question": "Crystal Methodology",
+          "answer": "A family of Agile methods tailored by project size and criticality, emphasizing communication and reflection."
+        },
+        {
+          "id": "q12",
+          "question": "Feature-Driven Development (FDD)",
+          "answer": "An Agile methodology based on building client-valued features, each deliverable in two weeks or less."
+        },
+        {
+          "id": "q13",
+          "question": "Agile Modeling",
+          "answer": "A practice promoting purposeful, lightweight modeling with adaptability and multiple model types."
+        },
+        {
+          "id": "q14",
+          "question": "Agile-Scrum",
+          "answer": "The combination of Agile principles with the structured framework of Scrum for project management and delivery."
+        }
+      ]
+      }
+
+    ]
+    }
+    ,
+    {
+  "id": "SummarizedReviewers",
+  "title": "Summarized Reviewers",
+  "Desc:": "AI Summarized Reviewers",
+  "reviewers": [
+    {
+  "id":"s1",    
+  "title": "Web Development Reviewer",
+  "sections": [
+    {
+      "title": "JavaScript Overview",
+      "bullets": [
+        "JavaScript is primarily used to add interactivity and dynamic behavior to websites.",
+        "Common keywords for declaring variables: let, const, or var.",
+        "Expression '2' + 2 results in '22' due to string concatenation.",
+        "Functions can be defined using: function myFunction() { }",
+        "The addEventListener method attaches an event handler to an element."
+      ]
+    },
+    {
+      "title": "Web Accessibility Essentials",
+      "bullets": [
+        "WCAG stands for Web Content Accessibility Guidelines.",
+        "Alt text describes images for screen readers and improves accessibility.",
+        "The aria-label attribute helps screen readers understand the purpose of a link.",
+        "Use heading tags (h1–h6) in order to provide a logical structure for screen readers.",
+        "Color contrast ensures readability for users with visual impairments."
+      ]
+    }
+  ]
+     },
+     {
+  "id": "s2",
+  "title": "Agile Development Reviewer",
+  "sections": [
+    {
+      "title": "The Agile Manifesto",
+      "bullets": [
+        "Individuals and interactions over processes and tools.",
+        "Working software over comprehensive documentation.",
+        "Customer collaboration over contract negotiation.",
+        "Responding to change over following a plan."
+      ]
+    },
+    {
+      "title": "Core Aspects of Agility",
+      "bullets": [
+        "Agility is the ability to respond rapidly and adaptively to change.",
+        "Encourages effective communication among stakeholders.",
+        "Involves the customer as part of the team.",
+        "Teams are self-organizing and in control of their work.",
+        "Focuses on rapid, incremental software delivery."
+      ]
+    },
+    {
+      "title": "Principles of Agile Development",
+      "bullets": [
+        "Early and continuous delivery of valuable software.",
+        "Embrace changing requirements even late in development.",
+        "Deliver working software frequently.",
+        "Daily collaboration between business and developers.",
+        "Projects are built around motivated individuals.",
+        "Face-to-face communication is most effective.",
+        "Working software is the primary measure of progress.",
+        "Sustainable development pace is maintained.",
+        "Continuous attention to technical excellence and good design.",
+        "Simplicity is essential.",
+        "Self-organizing teams yield the best outcomes.",
+        "Teams reflect and adapt regularly."
+      ]
+    },
+    {
+      "title": "Human Factors in Agile Teams",
+      "bullets": [
+        "Competence, common focus, and collaboration are essential.",
+        "Teams should have decision-making ability and mutual trust.",
+        "Teams must be self-organizing and adaptable to ambiguity."
+      ]
+    },
+    {
+      "title": "Agile Methodologies",
+      "bullets": [
+        "Extreme Programming (XP): User stories, refactoring, pair programming, unit testing.",
+        "Adaptive Software Development (ASD): Time-boxing, risk awareness, mission-driven planning.",
+        "Dynamic Systems Development Method (DSDM): Iterative development, active user involvement, integrated testing.",
+        "Scrum: Sprints, daily stand-ups, backlog-driven work, time-boxed demos.",
+        "Crystal: Tailored to team size and project complexity, promotes face-to-face communication and reflection.",
+        "Feature-Driven Development (FDD): Features defined using templates, 'design and build' merged.",
+        "Agile Modeling: Model with purpose, keep it lightweight, adapt to local context.",
+        "Agile-Scrum: Combines agile values with Scrum's structured roles and events."
+      ]
+    }
+  ]
+      }
+
+
+  ]
+    }
+
+   
+  ]
+
+  
+}

@@ -9,11 +9,15 @@ import ThemedButton from '../../components/ThemedButton';
 import Spacer from '../../components/Spacer';
 import ThemedFlashcard from '../../components/ThemedFlashcard';
 import { mockFlashcards } from '../../lib/data/mockFlashcards';
+import { useLocalSearchParams } from 'expo-router';
+
+const { file } = useLocalSearchParams();
+const parsedCard = file ? JSON.parse(file) : null;
 
 const ACFlashcardResult = () => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentCard = mockFlashcards[currentIndex];
+  const currentCard = parsedCard || mockFlashcards[currentIndex];
 
   const handleNext = () => {
     if (currentIndex < mockFlashcards.length - 1) {

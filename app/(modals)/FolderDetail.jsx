@@ -1,27 +1,13 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import ThemedView from '../../components/ThemedView';
 import Spacer from '../../components/Spacer';
 import ThemedText from '../../components/ThemedText';
 import Separator from '../../components/Separator';
-
-const placeholderFiles = {
-  ac: [
-    { id: '1', name: 'Software Process Models' },
-    { id: '2', name: 'Networking Acronyms' },
-  ],
-  td: [
-    { id: '3', name: 'Database Terms' },
-    { id: '4', name: 'Security Definitions' },
-  ],
-  sr: [
-    { id: '5', name: 'OOP Concepts' },
-    { id: '6', name: 'Web Dev Summary' },
-  ],
-};
+import { mockAcronyms, mockTerms, mockSummaries } from '../../lib/data/mockFlashcards';
 
 const FolderDetail = () => {
   const route = useRoute();
@@ -42,11 +28,20 @@ const FolderDetail = () => {
     ? 'td'
     : 'sr';
 
-  const files = placeholderFiles[folderKey];
+  let files = [];
+
+  if (folderKey === 'ac') {
+    files = mockAcronyms;
+  } else if (folderKey === 'td') {
+    files = mockTerms;
+  } else {
+    files = mockSummaries;
+  }
+
   const openFile = (file) => {
-    // eventually push to a screen to view/edit that flashcard
-    navigation.navigate('FlashcardView', { file });
+    router.push('/(flashcards)/ACFlashcardsResult?file=' + encodeURIComponent(JSON.stringify(file)));
   };
+
 
   return (
     <ThemedView style={styles.container}>
