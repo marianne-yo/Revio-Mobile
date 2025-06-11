@@ -13,6 +13,7 @@ const RootLayout = () => {
       <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
       <Stack.Screen name="(flashcards)" options={{ headerShown: false }} />
       <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
+      <Stack.Screen name="(modals)" options={{ headerShown: false }} />
       <Stack.Screen name="index" options={{ headerShown: false }} />
     </Stack>
   );

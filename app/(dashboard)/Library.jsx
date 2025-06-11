@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableWithoutFeedback, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { Ionicons } from "@expo/vector-icons"
-import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
@@ -13,26 +13,27 @@ import useCustomFonts from '../../hooks/useCustomFonts'
 
 //this makes the predefined folders
 const folders = [
-  { id: 'a1', name: 'Acronym Mnemonics Flashcards'},
-  { id: 'q2', name: 'Terms and Definitions Flashcards'},
-  { id: 's3', name: 'Summarized Reviewers'},
+  { id: 'ac', name: 'Acronym Mnemonics Flashcards'},
+  { id: 'td', name: 'Terms and Definitions Flashcards'},
+  { id: 'sr', name: 'Summarized Reviewers'},
 ]
 
 const Library = () => {
-  const navigation = useNavigation();
+  const router = useRouter();
   const [fontsLoaded] = useCustomFonts();
 
-  if (!fontsLoaded) return null; // prevent flashing default font
+  if (!fontsLoaded) return null;
 
   const renderFolder = ({ item }) => (
     <TouchableOpacity
       style={styles.folder}
-      onPress={() => navigation.navigate('FolderDetail', { folder: item.name })}
+      onPress={() => router.push(`(modals)/FolderDetail?folder=${encodeURIComponent(item.name)}`)}
     >
       <Ionicons name='folder' size={32} style={styles.folderIcon} />
       <Text style={styles.folderText}>{item.name}</Text>
     </TouchableOpacity>
   );
+
 
   return (
     <ThemedView style={styles.container}>

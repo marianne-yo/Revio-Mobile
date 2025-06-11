@@ -36,45 +36,49 @@ const Settings = () => {
     }
   };
 
-  const handleDeleteAccount = async () => {
-    Alert.alert(
-      "Delete Account",
-      "Are you sure you want to permanently delete your account?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
-        },
-        {
-          text: "Yes, Delete",
-          style: "destructive",
-          onPress: async () => {
-            const user = auth.currentUser;
+const handleDeleteAccount = async () => {
+  Alert.alert(
+    "Delete Account",
+    "Are you sure you want to permanently delete your account?",
+    [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Yes, Delete",
+        style: "destructive",
+        onPress: async () => {
+          const user = auth.currentUser;
 
-            if (user) {
-              try {
-                await deleteUser(user);
-                Alert.alert("Account Deleted", "Your account has been deleted.");
+          if (user) {
+            try {
+              // Deletes Firestore user document
+              const userDocRef = doc(db, 'users', user.uid);
+              await deleteDoc(userDocRef);
+
+              // Deletes Firebase Auth user
+              await deleteUser(user);
+
+              Alert.alert("Account Deleted", "Your account has been permanently deleted.");
+              router.replace('/Login');
+            } catch (error) {
+              console.error("Delete Account Error:", error);
+
+              if (error.code === "auth/requires-recent-login") {
+                Alert.alert(
+                  "Re-authentication Required",
+                  "Please log in again to delete your account."
+                );
                 router.replace('/Login');
-              } catch (error) {
-                console.error("Delete Account Error:", error);
-
-                if (error.code === "auth/requires-recent-login") {
-                  Alert.alert(
-                    "Re-authentication Required",
-                    "Please log in again to delete your account."
-                  );
-                  router.replace('/Login');
-                } else {
-                  Alert.alert("Error", "Could not delete account.");
-                }
+              } else {
+                Alert.alert("Error", "Could not delete account.");
               }
             }
           }
         }
-      ]
-    );
-  };
+      }
+    ]
+  );
+};
+
 
 
   return (
