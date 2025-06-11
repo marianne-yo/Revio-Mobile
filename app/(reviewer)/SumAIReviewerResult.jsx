@@ -6,33 +6,48 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import ThemedView from '../../components/ThemedView';
 import ThemedText from '../../components/ThemedText';
 import Spacer from '../../components/Spacer';
+import PomodoroTimer from '../../components/PomodoroTimer';
 
 const SumAIReviewerResult = () => {
   const router = useRouter();
   const { file } = useLocalSearchParams();
-  const parsed = file ? JSON.parse(file) : null;
+  let parsed = null;
+  try {
+    parsed = file ? JSON.parse(file) : null;
+  } catch (err) {
+    console.warn('Invalid file param:', err);
+  }
 
   return (
     <ThemedView style={styles.container}>
       <View style={styles.backContainer}>
-        <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
+        <Ionicons 
+        style={{justifyContent: 'center'}}
+        name="arrow-back" size={24} color="white" onPress={() => router.back()} />
         <ThemedText style={styles.backText}>Back</ThemedText>
       </View>
 
-      <ScrollView>
-        <ThemedText style={styles.title}>{parsed?.title || 'AI Summary'}</ThemedText>
-        <Spacer height={10} />
+      {parsed ? (
+      <>
+        <PomodoroTimer />
+        <ScrollView>
+          <ThemedText style={styles.title}>{parsed.title || 'Reviewer'}</ThemedText>
+          <Spacer height={10} />
+          {parsed.sections?.map((section, index) => (
+            <View key={index} style={styles.section}>
+              <ThemedText style={styles.sectionTitle}>{section.title}</ThemedText>
+              {section.bullets.map((bullet, idx) => (
+                <ThemedText key={idx} style={styles.bulletText}>• {bullet}</ThemedText>
+              ))}
+              <Spacer height={15} />
+            </View>
+          ))}
+        </ScrollView>
+      </>
+    ) : (
+      <ThemedText style={{ color: 'white' }}>No data to display</ThemedText>
+    )}
 
-        {parsed?.sections?.map((section, index) => (
-          <View key={index} style={styles.section}>
-            <ThemedText style={styles.sectionTitle}>{section.title}</ThemedText>
-            {section.bullets.map((bullet, idx) => (
-              <ThemedText key={idx} style={styles.bulletText}>• {bullet}</ThemedText>
-            ))}
-            <Spacer height={15} />
-          </View>
-        ))}
-      </ScrollView>
     </ThemedView>
   );
 };
@@ -46,5 +61,5 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 18, color: '#FFA500', marginBottom: 5, fontWeight: 'bold' },
   bulletText: { color: '#fff', fontSize: 14, marginLeft: 10 },
   backContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
-  backText: { fontSize: 16, color: 'white', marginLeft: 5 }
+  backText: { fontSize: 16, color: 'white', marginLeft: 5, justifyContent: 'center' }
 });
