@@ -1,16 +1,14 @@
 import { StyleSheet, Text, TouchableWithoutFeedback, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons" //icons
 import { useRouter } from 'expo-router'
-
+//Themed components
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedButton from '../../components/ThemedButton'
 import Separator from '../../components/Separator'
-
-import useCustomFonts from '../../hooks/useCustomFonts'
-
+import useCustomFonts from '../../hooks/useCustomFonts' //imported fonts
 //this makes the predefined folders
 const folders = [
   { id: 'ac', name: 'Acronym Mnemonics Flashcards'},
@@ -33,7 +31,6 @@ const Library = () => {
       <Text style={styles.folderText}>{item.name}</Text>
     </TouchableOpacity>
   );
-
 
   return (
     <ThemedView style={styles.container}>

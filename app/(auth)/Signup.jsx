@@ -1,16 +1,19 @@
 import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, Alert, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { Link, useRouter } from 'expo-router';
+//icons
 import { Ionicons } from '@expo/vector-icons';
+//firebase
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth, db } from '../../lib/firebaseConfig';
 import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
-
+//themed components
 import ThemedView from '../../components/ThemedView';
 import Spacer from '../../components/Spacer';
 import ThemedText from '../../components/ThemedText';
 import ThemedTextInput from '../../components/ThemedTextInput';
 import ThemedButton from '../../components/ThemedButton';
+//imported the fonts
 import useCustomFonts from '../../hooks/useCustomFonts';
 
 const Signup = () => {

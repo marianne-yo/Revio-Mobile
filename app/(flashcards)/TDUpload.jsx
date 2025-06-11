@@ -2,35 +2,33 @@ import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Ionicons } from "@expo/vector-icons"
-
+//for the upload btn
 import * as DocumentPicker from 'expo-document-picker';
 import { Alert } from 'react-native';
-
+//themed components
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedButton from '../../components/ThemedButton'
 import { Colors } from '../../constants/Colors'
 import React from 'react';
-
 import useCustomFonts from '../../hooks/useCustomFonts'
 
 const TDUpload = () => {
     const router = useRouter();
     const [fontsLoaded] = useCustomFonts();
-    if (!fontsLoaded) return null; // prevent flashing default font
+    if (!fontsLoaded) return null;
     const handleFileUpload = async () => {
         try {
         const result = await DocumentPicker.getDocumentAsync({
             type: [
-            'application/pdf',                        // PDF
+            'application/pdf',                                                         // PDF
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // DOCX
             'application/vnd.openxmlformats-officedocument.presentationml.presentation' // PPTX
             ],
             copyToCacheDirectory: true,
             multiple: false
         });
-
 
         if (result.canceled) {
             console.log('User cancelled the picker');
@@ -59,7 +57,6 @@ const TDUpload = () => {
         />
         <ThemedText style={styles.backText}>Back</ThemedText>
       </View>
-
 
       <ThemedText style={styles.title}>Terms and Definition</ThemedText>
       <ThemedText style={styles.desc}>

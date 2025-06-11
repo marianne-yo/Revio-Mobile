@@ -19,7 +19,6 @@ function ThemedButton({ style, children, ...props }) {
   );
 }
 
-
 export default ThemedButton
 
 export const styles = StyleSheet.create({

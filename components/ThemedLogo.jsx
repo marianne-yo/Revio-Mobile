@@ -1,5 +1,4 @@
 import { Image, useColorScheme } from 'react-native'
-
 //images
 import DarkLogo from '../assets/img/revio-pngicon-dark.png'
 import LightLogo from '../assets/img/revio-icon-dark.png'

@@ -3,10 +3,8 @@ import { Colors } from '../constants/Colors'
 import React from 'react';
 import useCustomFonts from '../hooks/useCustomFonts'
 
-
 const ThemedText = ({ style, title = false, bold = false, ...props }) => {
   const [fontsLoaded] = useCustomFonts();
-
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
   if (!fontsLoaded) return null;
@@ -28,6 +26,5 @@ const ThemedText = ({ style, title = false, bold = false, ...props }) => {
     />
   );
 };
-
 
 export default ThemedText

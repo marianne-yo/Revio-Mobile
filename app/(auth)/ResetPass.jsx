@@ -2,13 +2,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 //icon imports
 import { Ionicons } from '@expo/vector-icons';
-
+//Themed components
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-
+//imported the fonts
 import useCustomFonts from '../../hooks/useCustomFonts'
 
 const ResetPass = () => {

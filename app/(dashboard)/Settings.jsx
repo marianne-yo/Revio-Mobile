@@ -1,29 +1,24 @@
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import React from 'react'
-
+//themed comoponents
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
 import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
 
 import useCustomFonts from '../../hooks/useCustomFonts'
-
+//firebase functions
 import { signOut } from 'firebase/auth'
-import { auth, db } from '../../lib/firebaseConfig'; // make sure this path is correct
-import { useRouter } from 'expo-router';
+import { auth, db } from '../../lib/firebaseConfig';
 import { deleteUser } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
-
+import { useRouter } from 'expo-router'; //imports router
 
 const router = useRouter();
-
-
 const Settings = () => {
   const [fontsLoaded] = useCustomFonts();
-  
   if (!fontsLoaded) return null;
 
   const handleLogout = async () => {
@@ -79,14 +74,11 @@ const handleDeleteAccount = async () => {
   );
 };
 
-
-
   return (
     <ThemedView style={styles.container}>
         
       <ThemedText
-        style={styles.title}
-      >
+        style={styles.title}>
         SETTINGS
       </ThemedText>
 
@@ -127,7 +119,6 @@ const handleDeleteAccount = async () => {
       <ThemedButton style={styles.deleteBtn} onPress={handleDeleteAccount}>
         <ThemedText style={styles.deleteTxt}>Delete Account</ThemedText>
       </ThemedButton>
-
     </ThemedView>
   )
 }

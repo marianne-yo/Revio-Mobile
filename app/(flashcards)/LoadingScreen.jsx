@@ -1,10 +1,11 @@
-// app/(flashcards)/LoadingScreen.jsx
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import React from 'react';
 import ThemedView from '../../components/ThemedView';
 import ThemedText from '../../components/ThemedText';
-
+import useCustomFonts from '../../hooks/useCustomFonts'
 const LoadingScreen = () => {
+  const [fontsLoaded] = useCustomFonts();
+  if (!fontsLoaded) return null;
   return (
     <ThemedView style={styles.container}>
       <ActivityIndicator size="large" color="#B5B5FF" style={styles.spinner} />
@@ -30,14 +31,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Poppins_700Bold',
+    fontFamily: 'Poppins-Bold',
     color: '#ffffff',
     marginBottom: 10,
     textAlign: 'center',
   },
   subtext: {
     fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: 'Poppins-Regular',
     color: '#cccccc',
     textAlign: 'center',
     paddingHorizontal: 20,

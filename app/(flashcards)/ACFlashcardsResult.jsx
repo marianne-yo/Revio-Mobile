@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-
+//themed components
 import ThemedView from '../../components/ThemedView';
 import ThemedText from '../../components/ThemedText';
 import ThemedButton from '../../components/ThemedButton';
@@ -69,7 +69,6 @@ const ACFlashcardResult = () => {
         />
      <Spacer />
 
-
       <View style={styles.pagination}>
         <Pressable onPress={handlePrev} disabled={currentIndex === 0}>
           <Ionicons name="arrow-back-circle" size={40} color="#B5B5FF" />
@@ -99,123 +98,121 @@ const ACFlashcardResult = () => {
 export default ACFlashcardResult;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        justifyContent: 'center'
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        marginBottom: 8
-    },
-    subtext: {
-        fontSize: 12,
-        color: '#999',
-        marginBottom: 20
-    },
-    cardTitle: {
-        textAlign: 'center',
-        color: '#ccc',
-        fontWeight: 'bold',
-        marginBottom: 12
-    },
-    cardBody: {
-        paddingHorizontal: 10,
-    },
-    pagination: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    actions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%'
-    },
-    editBtn: {
-        backgroundColor: '#B5B5FF',
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        borderRadius: 12,
-        width: '30%'
-    },
-    btnText: {
-        color: '#200448',
-        fontWeight: 'bold',
-        fontSize: 14,
-        textAlign: 'center'
-    },
-    intenseBtn: {
-        borderWidth: 1,
-        borderColor: '#F14C4C',
-        backgroundColor: 'transparent',
-        paddingHorizontal: 12,
-        paddingVertical: 10,
-        borderRadius: 12,
-        width: '40%'
-    },
-    intenseText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 14,
-        textAlign: 'center'
-    },
-    musicBtn: {
-        width: 44,
-        height: 44,
-        backgroundColor: '#B5B5FF',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 22
-    },
-    backContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    backText: {
-        fontSize: 16,
-        color: 'white',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 5,
-        marginTop: 5
-    },
-    cardWrapper: {
-        width: '100%',
-        height: 200,
-        alignItems: 'center',
-        justifyContent: 'center',
-        perspective: 1000
-    },
-    square: {
-        width: 50,
-        height: 50,
-        backgroundColor: '#B5B5FF',
-        borderRadius: 8,
-        alignSelf: 'center',
-        marginBottom: 12,
-        },
-    squareContainer: {
-        width: '100%',
-        backgroundColor: '#5C5C76',
-        padding: 16,
-        borderRadius: 10,
-        borderColor: '#565656',
-        borderWidth: 1,
-        alignItems: 'center',
-    },
-    squareContainer2: {
-        width: '100%',
-        backgroundColor: '#2E2E40',
-        padding: 16,
-        borderRadius: 10,
-        borderColor: '#565656',
-        borderWidth: 1,
-        alignItems: 'center',
-    },
-
-
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center'
+  },
+  title: {
+      fontSize: 32,
+      fontWeight: 'bold',
+      marginBottom: 8
+  },
+  subtext: {
+      fontSize: 12,
+      color: '#999',
+      marginBottom: 20
+  },
+  cardTitle: {
+      textAlign: 'center',
+      color: '#ccc',
+      fontWeight: 'bold',
+      marginBottom: 12
+  },
+  cardBody: {
+      paddingHorizontal: 10,
+  },
+  pagination: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+  },
+  actions: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%'
+  },
+  editBtn: {
+      backgroundColor: '#B5B5FF',
+      paddingHorizontal: 16,
+      paddingVertical: 10,
+      borderRadius: 12,
+      width: '30%'
+  },
+  btnText: {
+      color: '#200448',
+      fontWeight: 'bold',
+      fontSize: 14,
+      textAlign: 'center'
+  },
+  intenseBtn: {
+      borderWidth: 1,
+      borderColor: '#F14C4C',
+      backgroundColor: 'transparent',
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      borderRadius: 12,
+      width: '40%'
+  },
+  intenseText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 14,
+      textAlign: 'center'
+  },
+  musicBtn: {
+      width: 44,
+      height: 44,
+      backgroundColor: '#B5B5FF',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 22
+  },
+  backContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+  },
+  backText: {
+      fontSize: 16,
+      color: 'white',
+      alignSelf: 'center',
+      justifyContent: 'center',
+      marginHorizontal: 5,
+      marginTop: 5
+  },
+  cardWrapper: {
+      width: '100%',
+      height: 200,
+      alignItems: 'center',
+      justifyContent: 'center',
+      perspective: 1000
+  },
+  square: {
+      width: 50,
+      height: 50,
+      backgroundColor: '#B5B5FF',
+      borderRadius: 8,
+      alignSelf: 'center',
+      marginBottom: 12,
+      },
+  squareContainer: {
+      width: '100%',
+      backgroundColor: '#5C5C76',
+      padding: 16,
+      borderRadius: 10,
+      borderColor: '#565656',
+      borderWidth: 1,
+      alignItems: 'center',
+  },
+  squareContainer2: {
+      width: '100%',
+      backgroundColor: '#2E2E40',
+      padding: 16,
+      borderRadius: 10,
+      borderColor: '#565656',
+      borderWidth: 1,
+      alignItems: 'center',
+  },
 });

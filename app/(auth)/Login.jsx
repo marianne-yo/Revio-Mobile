@@ -1,8 +1,4 @@
-import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, Alert, View, 
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView
- } from 'react-native';
+import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, Alert, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import React from 'react'
 import { Link } from 'expo-router'
 import { useState } from 'react'
@@ -14,7 +10,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { auth, db } from '../../lib/firebaseConfig';
 import { sendEmailVerification } from 'firebase/auth';
-
+//themed components
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
@@ -23,12 +19,11 @@ import ThemedButton from '../../components/ThemedButton'
 import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
-
+//imported the fonts
 import useCustomFonts from '../../hooks/useCustomFonts'
 
 const Login = () => {
     const [fontsLoaded] = useCustomFonts();
-
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
@@ -37,7 +32,6 @@ const Login = () => {
 
      if (!fontsLoaded) return null;
 
-
     const handleSubmit = async () => {
         if (!emailOrUsername || !password) {
             Alert.alert('Missing fields', 'Please enter all fields');
@@ -45,7 +39,6 @@ const Login = () => {
         }
 
         let loginEmail = emailOrUsername;
-
         // If it's not an email, looks up the username
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrUsername);
         if (!isEmail) {
@@ -63,7 +56,6 @@ const Login = () => {
                 return;
             }
         }
-
         // Try logging in with the email
         try {
         const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
@@ -90,8 +82,8 @@ const Login = () => {
                 contentContainerStyle={{ flexGrow: 1 }}
                 keyboardShouldPersistTaps="handled">
                     <ThemedView style={styles.container}>
-
-                        <ThemedLogo style={styles.logo}/>
+                        {/* this is the logo */}
+                        <ThemedLogo style={styles.logo}/> 
 
                         <Spacer height={5}/>
                         <ThemedText title={true} style={[styles.title]}>
@@ -129,6 +121,7 @@ const Login = () => {
                             <ThemedText style={styles.forgotPassText}>Forgot Password?</ThemedText>
                         </Link>
 
+                        {/* fallback if the user is not available, it displays Resend email verification */}
                         {unverifiedUser && (
                             <ThemedButton
                                 onPress={async () => {
@@ -163,8 +156,6 @@ const Login = () => {
                                 </Text>
                             )}
                         </ThemedSecondaryButton>
-
-                        
                     </ThemedView>
             </ScrollView>
         </TouchableWithoutFeedback>
@@ -193,10 +184,7 @@ const styles = StyleSheet.create({
         height: 170
     },
     link:{
-        // fontSize: 10,
-        // fontFamily: 'Poppins-Medium',
         padding: 10,
-
     },
     buttonText: {
         color: '#200448',

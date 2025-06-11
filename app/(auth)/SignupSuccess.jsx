@@ -16,8 +16,8 @@ const SignupSuccess = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace('/Login'); // redirect after 5s
-    }, 5000);
+      router.replace('/Login'); // redirect after 3s
+    }, 3000);
 
     return () => clearTimeout(timer); // cleanup
   }, []);

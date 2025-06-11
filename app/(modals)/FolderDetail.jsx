@@ -1,4 +1,3 @@
-// screens/FolderDetail.jsx
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -44,14 +43,12 @@ const FolderDetail = () => {
     : 'sr';
 
   const files = placeholderFiles[folderKey];
-
   const openFile = (file) => {
     // eventually push to a screen to view/edit that flashcard
     navigation.navigate('FlashcardView', { file });
   };
 
   return (
-    
     <ThemedView style={styles.container}>
       <View style={styles.backContainer}>
         <Ionicons
@@ -115,7 +112,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-
   backText: {
     fontSize: 16,
     color: 'white',

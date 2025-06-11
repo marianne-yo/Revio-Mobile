@@ -1,4 +1,3 @@
-// components/ThemedTextInput.jsx
 import { View, TextInput, useColorScheme, StyleSheet } from 'react-native';
 import React from 'react';
 import { Colors } from '../constants/Colors';
@@ -7,9 +6,8 @@ import useCustomFonts from '../hooks/useCustomFonts'
 const ThemedTextInput = ({ style, rightIcon, ...props }) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
-
   const [fontsLoaded] = useCustomFonts();
-  if (!fontsLoaded) return null; // prevent flashing default font
+  if (!fontsLoaded) return null;
   return (
     <View style={[styles.inputWrapper, { backgroundColor: theme.txtInputColor, borderColor: theme.txtInputBorder }, style]}>
       <TextInput
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,     
     textAlignVertical: 'center', 
   },
-
   iconWrapper: {
     marginLeft: 10,
   }

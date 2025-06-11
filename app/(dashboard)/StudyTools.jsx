@@ -1,47 +1,38 @@
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Button } from 'react-native'
 import React from 'react'
 import { Ionicons } from "@expo/vector-icons"
-
+//themed comoponents
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
 import ThemedText from '../../components/ThemedText'
-import ThemedTextInput from '../../components/ThemedTextInput'
 import ThemedButton from '../../components/ThemedButton'
-import ThemedLogo from '../../components/ThemedLogo'
 import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
-
 import { useRouter } from 'expo-router';
 import useCustomFonts from '../../hooks/useCustomFonts'
 
 const StudyTools = () => {
   const router = useRouter();
   const [fontsLoaded] = useCustomFonts();
-  if (!fontsLoaded) return null; // prevent flashing default font
+  if (!fontsLoaded) return null;
 
   return (
     <ThemedView style={styles.container}>
         
-      <ThemedText
-        style={styles.title}
-      >
+      <ThemedText style={styles.title}>
         Study Tools
       </ThemedText>
 
       <Spacer height={20}/>
       {/* flashcards maker */}
-      <ThemedText
-        style={styles.subText}
-      >
+      <ThemedText style={styles.subText}>
         Flashcards Maker
       </ThemedText>
 
       <Spacer height={15}/>
 
-      <ThemedText
-        style={styles.desc}
-      >
+      <ThemedText style={styles.desc}>
         Using mnemonics helps you memorize faster
       </ThemedText>
 
@@ -61,12 +52,9 @@ const StudyTools = () => {
         </ThemedText>
       </ThemedButton>
 
-
       <Spacer height={10}/>
 
-      <ThemedText
-        style={styles.desc}
-      >
+      <ThemedText style={styles.desc}>
         Utilize using Leitner technique in studying
       </ThemedText>
       <ThemedButton 
@@ -87,17 +75,13 @@ const StudyTools = () => {
 
       {/* reviewer generator */}
       <Spacer height={10}/>
-      <ThemedText
-        style={styles.subText}
-      >
+      <ThemedText style={styles.subText}>
         Reviewer Generator
       </ThemedText>
 
       <Spacer height={15}/>
 
-      <ThemedText
-        style={styles.desc}
-      >
+      <ThemedText style={styles.desc}>
         Study using a Pomodoro timer
       </ThemedText>
 
@@ -135,9 +119,7 @@ const StudyTools = () => {
         </ThemedText>
         
       </ThemedButton>
-
       <Spacer height={10}/>
-
     </ThemedView>
   )
 }

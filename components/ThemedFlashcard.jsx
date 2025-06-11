@@ -1,13 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  interpolate,
-} from 'react-native-reanimated';
+import Animated, {useSharedValue, useAnimatedStyle, withTiming, interpolate,} from 'react-native-reanimated';
 import { TouchableWithoutFeedback } from 'react-native';
-
 
 const ThemedFlashcard = ({ frontContent, backContent, height = 245, width = '100%' }) => {
   const rotate = useSharedValue(0);
