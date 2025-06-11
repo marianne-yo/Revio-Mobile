@@ -7,14 +7,24 @@ import ThemedView from '../../components/ThemedView';
 import Spacer from '../../components/Spacer';
 import ThemedText from '../../components/ThemedText';
 import Separator from '../../components/Separator';
-import { mockAcronyms, mockTerms, mockSummaries } from '../../lib/data/mockFlashcards';
-
+import { getFolderReviewers } from '../../lib/data/reviewerFlashcards';
+import useCustomFonts from '../../hooks/useCustomFonts' //imported fonts
 const FolderDetail = () => {
-  const route = useRoute();
   const router = useRouter();
   const { folder } = useLocalSearchParams();
+  const [fontsLoaded] = useCustomFonts();
+  if (!fontsLoaded) return null;
+  
+  const folderMap = {
+    'acronym mnemonics flashcards': 'AcronymMnemonics',
+    'terms and definitions flashcards': 'TermsAndCondition',
+    'summarized reviewers': 'SummarizedReviewers'
+  };
 
-  if (!folder || typeof folder !== 'string') {
+  const folderId = folderMap[folder?.toLowerCase()];
+  const files = getFolderReviewers(folderId);
+
+  if (!folderId) {
     return (
       <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ThemedText>Invalid folder selected.</ThemedText>
@@ -22,36 +32,24 @@ const FolderDetail = () => {
     );
   }
 
-  const folderKey = folder.toLowerCase().includes('acronym')
-    ? 'ac'
-    : folder.toLowerCase().includes('term')
-    ? 'td'
-    : 'sr';
-
-  let files = [];
-
-  if (folderKey === 'ac') {
-    files = mockAcronyms;
-  } else if (folderKey === 'td') {
-    files = mockTerms;
-  } else {
-    files = mockSummaries;
-  }
-
   const openFile = (file) => {
-    router.push('/(flashcards)/ACFlashcardsResult?file=' + encodeURIComponent(JSON.stringify(file)));
+    if (file.questions) {
+      router.push('/(flashcards)/TDFlashcardsResult?file=' + encodeURIComponent(JSON.stringify(file)));
+    } else if (file.sections) {
+      // Decide based on some logic (e.g. ID or metadata)
+      const isAI = file.id.startsWith('s'); // Example condition
+      const screen = isAI ? 'SumAIReviewerResult' : 'StandardReviewerResult';
+      router.push(`/(reviewer)/${screen}?file=` + encodeURIComponent(JSON.stringify(file)));
+    } else {
+      router.push('/(flashcards)/ACFlashcardsResult?file=' + encodeURIComponent(JSON.stringify(file)));
+    }
   };
-
 
   return (
     <ThemedView style={styles.container}>
+      <Spacer />
       <View style={styles.backContainer}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          color="white"
-          onPress={() => router.back()}
-        />
+        <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
         <ThemedText style={styles.backText}>Back</ThemedText>
       </View>
 
@@ -64,7 +62,7 @@ const FolderDetail = () => {
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.file} onPress={() => openFile(item)}>
             <Ionicons name='document-text-outline' size={24} color='#B5B5FF' style={{ marginRight: 10 }} />
-            <Text style={styles.fileText}>{item.name}</Text>
+            <Text style={styles.fileText}>{item.title || item.name}</Text>
           </TouchableOpacity>
         )}
       />
@@ -110,8 +108,6 @@ const styles = StyleSheet.create({
   backText: {
     fontSize: 16,
     color: 'white',
-    alignSelf: 'center',
-    justifyContent: 'center',
     marginHorizontal: 5,
     marginTop: 5
   },
