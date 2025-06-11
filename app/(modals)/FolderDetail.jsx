@@ -37,7 +37,7 @@ const FolderDetail = () => {
       router.push('/(flashcards)/TDFlashcardsResult?file=' + encodeURIComponent(JSON.stringify(file)));
     } else if (file.sections) {
       // Decide based on some logic (e.g. ID or metadata)
-      const isAI = file.id.startsWith('s'); // Example condition
+      const isAI = file.id.startsWith('ai'); // Example condition
       const screen = isAI ? 'SumAIReviewerResult' : 'StandardReviewerResult';
       router.push(`/(reviewer)/${screen}?file=` + encodeURIComponent(JSON.stringify(file)));
     } else {
