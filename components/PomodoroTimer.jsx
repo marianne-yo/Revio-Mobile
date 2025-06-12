@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import Spacer from '../components/Spacer';
 
-const POMODORO_TIME = 1 * 60;
-const SHORT_BREAK = 1 * 60;
+const POMODORO_TIME = 25 * 60;
+const SHORT_BREAK = 5 * 60;
 const LONG_BREAK = 15 * 60;
 const MAX_POMOS = 4;
 
