@@ -21,7 +21,7 @@ import Separator from '../../components/Separator'
 import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 //imported the fonts
 import useCustomFonts from '../../hooks/useCustomFonts'
-
+import Toast from 'react-native-toast-message';
 const Login = () => {
     const [fontsLoaded] = useCustomFonts();
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -34,7 +34,11 @@ const Login = () => {
 
     const handleSubmit = async () => {
         if (!emailOrUsername || !password) {
-            Alert.alert('Missing fields', 'Please enter all fields');
+            Toast.show({
+                type: 'error',
+                text1: 'Missing fields',
+                text2: 'Please fill in all fields',
+            })
             return;
         }
 
@@ -46,13 +50,21 @@ const Login = () => {
                 const q = query(collection(db, 'users'), where('username', '==', emailOrUsername.toLowerCase()));
                 const querySnapshot = await getDocs(q);
                 if (querySnapshot.empty) {
-                    Alert.alert('Login Failed', 'Username not found');
+                    Toast.show({
+                        type: 'error',
+                        text1: 'Login failed.',
+                        text2: 'Username not found.',
+                    })
                     return;
                 }
                 loginEmail = querySnapshot.docs[0].data().email;
             } catch (err) {
                 console.error('Username lookup error:', err);
-                Alert.alert('Login Failed', 'Could not find matching user');
+                Toast.show({
+                    type: 'error',
+                    text1: 'Login failed.',
+                    text2: 'Could not find matching user.',
+                })
                 return;
             }
         }
@@ -62,14 +74,22 @@ const Login = () => {
 
         if (!userCredential.user.emailVerified) {
             setUnverifiedUser(userCredential.user); // save user for resend
-            Alert.alert("Email Not Verified", "Please verify your email before logging in.");
+            Toast.show({
+                type: 'info',
+                text1: 'Email not verified.',
+                text2: "Please verify your email befor logging in."
+            })
             return;
         }
         // Alert.alert('Success', `Welcome ${userCredential.user.email}`);
         router.replace('/StudyTools');
         } catch (err) {
         console.error('Login error:', err.message);
-        Alert.alert('Login Failed', err.message);
+        Toast.show({
+            type: 'error',
+            text1: 'Login failed.',
+            text2: err.message,
+        })
         }
     };
 
@@ -127,9 +147,18 @@ const Login = () => {
                                 onPress={async () => {
                                 try {
                                     await sendEmailVerification(unverifiedUser);
-                                    Alert.alert("Verification Email Sent", "Please check your inbox.");
+                                    Toast.show({
+                                        type: 'success',
+                                        text1: 'Verification Email Sent',
+                                        text2: 'Please check your inbox.',
+                                    });
+
                                 } catch (err) {
-                                    Alert.alert("Error", "Could not send verification email.");
+                                    Toast.show({
+                                        type: 'error',
+                                        text1: 'Error',
+                                        text2: 'Could not send verification email.',
+                                    });
                                     console.error("Resend verification error:", err.message);
                                 }
                                 }}

@@ -15,7 +15,7 @@ import ThemedTextInput from '../../components/ThemedTextInput';
 import ThemedButton from '../../components/ThemedButton';
 //imported the fonts
 import useCustomFonts from '../../hooks/useCustomFonts';
-
+import Toast from 'react-native-toast-message';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,29 +70,53 @@ const Signup = () => {
 
   const handleSubmit = async () => {
     if (!username || !email || !password) {
-      Alert.alert("Missing Info", "All fields are required.");
+      Toast.show({
+        type: 'error',
+        text1: 'Missing Info',
+        text2: 'All fields are required.',
+      });
       return;
     }
     if (!isValidEmail(email)) {
-      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      Toast.show({
+        type: 'error',
+        text1: 'Invalid Email',
+        text2: 'Please enter a valid email address.',
+      });
       return;
     }
     if (!isValidUsername(username)) {
-      Alert.alert("Invalid Username", "Username must be at least 3 characters and only include letters, numbers, or underscores.");
+      Toast.show({
+        type: 'error',
+        text1: 'Invalid Username',
+        text2: 'Use at least 3 characters: letters, numbers, or underscores.',
+      });
       return;
     }
     if (!isValidPassword(password)) {
-      Alert.alert("Weak Password", "Password must contain at least 1 uppercase letter, 1 number, and be at least 8 characters.");
+      Toast.show({
+        type: 'error',
+        text1: 'Weak Password',
+        text2: 'Use at least 8 chars with 1 number & uppercase letter.',
+      });
       return;
     }
     if (password !== confirmPassword) {
-      Alert.alert("Passwords Don't Match", "Please re-enter your password.");
+      Toast.show({
+        type: 'error',
+        text1: 'Password Mismatch',
+        text2: 'Passwords do not match.',
+      });
       return;
     }
 
     const usernameAvailable = await checkUsernameAvailability(username);
     if (!usernameAvailable) {
-      Alert.alert("Username Taken", "Please choose another username.");
+      Toast.show({
+        type: 'error',
+        text1: 'Username Taken',
+        text2: 'Please choose another one.',
+      });
       return;
     }
 
@@ -107,7 +131,11 @@ const Signup = () => {
       router.replace({ pathname: '/SignupSuccess', params: { username: username.toLowerCase() } });
     } catch (err) {
       console.error("Signup Error:", err.message);
-      Alert.alert("Signup Failed", err.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Signup Failed',
+        text2: err.message,
+      });
     }
   };
 

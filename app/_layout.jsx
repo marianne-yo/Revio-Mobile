@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import React from 'react';
-
+import Toast from 'react-native-toast-message';
 const RootLayout = () => {
   return (
     <Stack screenOptions={{
@@ -15,6 +15,7 @@ const RootLayout = () => {
       <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
       <Stack.Screen name="(modals)" options={{ headerShown: false }} />
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Toast />
     </Stack>
   );
 };

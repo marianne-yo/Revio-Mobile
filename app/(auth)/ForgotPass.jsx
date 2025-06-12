@@ -11,6 +11,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../..//lib/firebaseConfig';
 import { useRouter } from 'expo-router';
 import { Colors } from '../../constants/Colors';
+import Toast from 'react-native-toast-message';
 const ForgotPass = () => {
   const [fontsLoaded] = useCustomFonts();
   const [email, setEmail] = useState('');
@@ -21,14 +22,27 @@ const ForgotPass = () => {
 
   const handleReset = async () => {
     if (!email) {
-      Alert.alert('Missing Email', 'Please enter your email address.');
+      Toast.show({
+        type: 'error',
+        text1: 'Missing email',
+        text2: 'Please enter your email address.',
+      });
       return;
     }
     try {
       await sendPasswordResetEmail(auth, email.toLowerCase());
-      Alert.alert('Reset Email Sent!', 'Check your email to reset your password.');
+      Toast.show({
+        type: 'success',
+        text1: 'Email sent!',
+        text2: 'Check your inbox to reset your password.',
+      });
     } catch (error) {
-      Alert.alert('Error', error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Reset failed!',
+        text2: error.message,
+      })
+
     }
   };
 
