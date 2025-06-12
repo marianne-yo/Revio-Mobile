@@ -128,6 +128,11 @@ const Signup = () => {
         email: email.toLowerCase(),
       });
       await sendEmailVerification(userCredential.user);
+      Toast.show({
+        type: 'success',
+        text1: 'Signup Successful',
+        text2: 'Verification email sent!',
+      });
       router.replace({ pathname: '/SignupSuccess', params: { username: username.toLowerCase() } });
     } catch (err) {
       console.error("Signup Error:", err.message);

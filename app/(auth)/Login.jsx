@@ -36,9 +36,9 @@ const Login = () => {
         if (!emailOrUsername || !password) {
             Toast.show({
                 type: 'error',
-                text1: 'Missing fields',
-                text2: 'Please fill in all fields',
-            })
+                text1: 'Missing Fields',
+                text2: 'Please enter both email and password',
+            });
             return;
         }
 
