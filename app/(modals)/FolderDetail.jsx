@@ -62,7 +62,7 @@ const FolderDetail = () => {
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.file} onPress={() => openFile(item)}>
             <Ionicons name='document-text-outline' size={24} color='#B5B5FF' style={{ marginRight: 10 }} />
-            <Text style={styles.fileText}>{item.title || item.name}</Text>
+            <Text style={styles.fileText}>{item.title}</Text>
           </TouchableOpacity>
         )}
       />
