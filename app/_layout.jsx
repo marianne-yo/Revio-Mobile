@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import React from 'react';
 import Toast, { BaseToast } from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
-
+import { MusicProvider } from '../lib/context/MusicContext';
 const toastConfig = {
   success: (props) => (
     <BaseToast
@@ -97,6 +97,7 @@ const toastConfig = {
 const RootLayout = () => {
   return (
     <>
+    <MusicProvider>
       <Stack screenOptions={{
         headerStyle: { backgroundColor: 'blue' },
         headerTintColor: "#ffffff",
@@ -110,6 +111,7 @@ const RootLayout = () => {
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
       <Toast config={toastConfig} />
+    </MusicProvider>
     </>
   );
 };

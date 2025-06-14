@@ -1,4 +1,3 @@
-// --- ForgotPass.jsx logic update ---
 import React, { useState } from 'react';
 import { Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme } from 'react-native';
 import ThemedView from '../../components/ThemedView';

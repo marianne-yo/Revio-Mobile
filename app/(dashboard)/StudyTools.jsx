@@ -11,6 +11,7 @@ import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
 import { useRouter } from 'expo-router';
 import useCustomFonts from '../../hooks/useCustomFonts'
+// import { useMusic } from '../../lib/context/MusicContext';
 
 const StudyTools = () => {
   const router = useRouter();
