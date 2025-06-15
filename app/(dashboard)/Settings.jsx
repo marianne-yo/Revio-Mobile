@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Alert } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 //themed comoponents
 import ThemedView from '../../components/ThemedView'
 import Spacer from '../../components/Spacer'
@@ -13,12 +13,15 @@ import useCustomFonts from '../../hooks/useCustomFonts'
 import { signOut } from 'firebase/auth'
 import { auth, db } from '../../lib/firebaseConfig';
 import { deleteUser } from 'firebase/auth';
-import { doc, deleteDoc } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { useRouter } from 'expo-router'; //imports router
 
 const router = useRouter();
 const Settings = () => {
   const [fontsLoaded] = useCustomFonts();
+  const [username, setUsername] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+
   if (!fontsLoaded) return null;
 
   const handleLogout = async () => {
@@ -31,58 +34,90 @@ const Settings = () => {
     }
   };
 
-const handleDeleteAccount = async () => {
-  Alert.alert(
-    "Delete Account",
-    "Are you sure you want to permanently delete your account?",
-    [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Yes, Delete",
-        style: "destructive",
-        onPress: async () => {
-          const user = auth.currentUser;
+  const handleDeleteAccount = async () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to permanently delete your account?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Yes, Delete",
+          style: "destructive",
+          onPress: async () => {
+            const user = auth.currentUser;
 
-          if (user) {
-            try {
-              // Deletes Firestore user document
-              const userDocRef = doc(db, 'users', user.uid);
-              await deleteDoc(userDocRef);
+            if (user) {
+              try {
+                // Deletes Firestore user document
+                const userDocRef = doc(db, 'users', user.uid);
+                await deleteDoc(userDocRef);
 
-              // Deletes Firebase Auth user
-              await deleteUser(user);
+                // Deletes Firebase Auth user
+                await deleteUser(user);
 
-              Alert.alert("Account Deleted", "Your account has been permanently deleted.");
-              router.replace('/Login');
-            } catch (error) {
-              console.error("Delete Account Error:", error);
-
-              if (error.code === "auth/requires-recent-login") {
-                Alert.alert(
-                  "Re-authentication Required",
-                  "Please log in again to delete your account."
-                );
+                Alert.alert("Account Deleted", "Your account has been permanently deleted.");
                 router.replace('/Login');
-              } else {
-                Alert.alert("Error", "Could not delete account.");
+              } catch (error) {
+                console.error("Delete Account Error:", error);
+
+                if (error.code === "auth/requires-recent-login") {
+                  Alert.alert(
+                    "Re-authentication Required",
+                    "Please log in again to delete your account."
+                  );
+                  router.replace('/Login');
+                } else {
+                  Alert.alert("Error", "Could not delete account.");
+                }
               }
             }
           }
         }
+      ]
+    );
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        setUserEmail(user.email || "Email not available")
+
+        try {
+          const userDocRef = doc(db, 'users', user.uid);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()){
+            setUsername(userDocSnap.data().username || 'N/A')
+          } else {
+            setUsername('N/A')
+          }
+        } catch (error) {
+          console.error("Error fetching username: ", error)
+          setUsername("Error fetching username")
+        }
+
+      } else {
+        setUserEmail('No user signed in')
+        setUsername('No user signed in')
       }
-    ]
-  );
-};
+    };
+    
+    fetchUserData();
+
+    const unsubscribe = auth.onAuthStateChanged(fetchUserData);
+    return () => unsubscribe();
+  }, []);
+  
+
+
 
   return (
     <ThemedView style={styles.container}>
-        
+      <Spacer height={10}/>
       <ThemedText
         style={styles.title}>
         SETTINGS
       </ThemedText>
-
-      <Spacer height={10}/>
       <ThemedText style={styles.subText} >
         Account
       </ThemedText>
@@ -95,17 +130,34 @@ const handleDeleteAccount = async () => {
           borderRadius: 7, 
           borderColor:"#565656",
           borderWidth: 1 ,
-          width: '50%',
-          padding: 15,
+          width: '100%',
+          padding: 5,
           alignContent: 'center'
           }]}>
           <ThemedText style={styles.STbtnText}>
-            Upload Photo
+            Choose Avatar
           </ThemedText>
         </ThemedButton>
         <Spacer height={5} />
-        <ThemedText style={styles.subTitle} > Username</ThemedText>
 
+        <ThemedText style={styles.subTitle} > Username</ThemedText>
+         <ThemedTextInput
+           style={{ width: '100%', marginBottom: 20, borderRadius: 5,
+            borderWidth: 0, backgroundColor: '#252533'
+           }}
+           value={username}
+           editable={false}
+         />
+         
+         <ThemedText style={styles.subTitle} > Email </ThemedText>
+         <ThemedTextInput
+          style={{ width: '100%', marginBottom: 20, borderRadius: 5,
+            borderWidth: 0, backgroundColor: '#252533'
+          }}
+           value={userEmail}
+           editable={false}
+         />
+         
       </ThemedView>
 
       <Spacer height={20}/>
@@ -148,7 +200,7 @@ const styles = StyleSheet.create({
   },
   subText:{
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold'
   },
   desc:{
     fontSize: 10,
@@ -161,14 +213,15 @@ const styles = StyleSheet.create({
     borderColor: "#B5B5B5",
     borderWidth: 2,
     borderRadius: 7,
-    padding: 10,
+    padding: 20,
     maxHeight: '50%',
     width: '100%'
   },
   STbtnText:{
     fontSize: 14,
-    fontWeight: 'medium',
-    textAlign: 'center'
+    fontFamily: 'Poppins-SemiBold',
+    textAlign: 'center',
+    padding: 5
   },
   deleteBtn:{
     backgroundColor: '#CD3232',
