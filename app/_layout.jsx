@@ -1,9 +1,13 @@
+// _layout.jsx of root app folder
 import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Toast, { BaseToast } from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import { MusicProvider } from '../lib/context/MusicContext';
+import { auth } from '../lib/firebaseConfig'; // Import Firebase auth instance
+import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
+
 const toastConfig = {
   success: (props) => (
     <BaseToast
@@ -30,7 +34,7 @@ const toastConfig = {
         color: '#ccc',
       }}
       renderLeadingIcon={() => (
-        <Ionicons name="checkmark-circle" size={24} color="#4CAF50" />
+        <Ionicons name="checkmark-circle" size={24} color="#4CAF50" style={{paddingLeft: 10}} />
       )}
     />
   ),
@@ -59,7 +63,7 @@ const toastConfig = {
         color: '#ccc',
       }}
       renderLeadingIcon={() => (
-        <Ionicons name="close-circle" size={24} color="#FF5252" />
+        <Ionicons name="close-circle" size={24} color="#FF5252" style={{paddingLeft: 10}} />
       )}
     />
   ),
@@ -88,34 +92,63 @@ const toastConfig = {
         color: '#ccc',
       }}
       renderLeadingIcon={() => (
-        <Ionicons name="information-circle" size={24} color="#FFD700" />
+        <Ionicons name="information-circle" size={24} color="#FFD700" style={{paddingLeft: 10}}/>
       )}
     />
   ),
 };
 
 const RootLayout = () => {
+  const [user, setUser] = useState(null); //default current user is null
+  const [appReady, setAppReady] = useState(false); // New state to manage app readiness
+// appReady is a state variable is introduced to prevent rendering the main application 
+// before the authentication state has been determined.
+// This avoids flickering or incorrect redirects.
+
+  useEffect(() => {
+                  //It subscribes to changes in the user's sign-in state.
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); //this updates the user state
+      setAppReady(true); // Set app as ready once auth state is checked
+    });
+
+    // Clean up the subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
+// This if block ensures that nothing is rendered until the
+// authentication state has been determined.
+  if (!appReady) {
+    // You might want to render a loading spinner or splash screen here
+    return null; 
+  }
+
   return (
     <>
-    <MusicProvider>
-      <Stack screenOptions={{
-        headerStyle: { backgroundColor: 'blue' },
-        headerTintColor: "#ffffff",
-        backgroundColor: "red"
-      }}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-        <Stack.Screen name="(flashcards)" options={{ headerShown: false }} />
-        <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
-        <Stack.Screen name="(modals)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
-      <Toast config={toastConfig} />
-    </MusicProvider>
+      <MusicProvider>
+        <Stack screenOptions={{
+          headerStyle: { backgroundColor: 'blue' },
+          headerTintColor: "#ffffff",
+          backgroundColor: "red"
+        }}>
+        {/* Conditional Nav based on Auth State */}
+          {user ? (
+            // User is logged in and not null, navigate to dashboard or desired authenticated screen
+            <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+          ) : (
+            // User is not logged in, navigate to auth screens
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          )}
+          <Stack.Screen name="(flashcards)" options={{ headerShown: false }} />
+          <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
+          <Stack.Screen name="(modals)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+        <Toast config={toastConfig} />
+      </MusicProvider>
     </>
   );
 };
 
 export default RootLayout;
-
 const styles = StyleSheet.create({});
