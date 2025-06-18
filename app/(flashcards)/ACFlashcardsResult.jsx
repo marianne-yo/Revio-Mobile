@@ -37,11 +37,14 @@ const ACFlashcardResult = () => {
   const frontContent = isAcronym ? (
     <View style={styles.squareContainer}>
       <ThemedText style={styles.cardTitle}>{currentCard.title}</ThemedText>
-      {currentCard.content.map(({ letter, word }) => (
-        <ThemedText key={letter} style={{ color: '#fff' }}>
-          <Text style={{ color: '#E5FF00' }}>{letter}</Text> {word}
-        </ThemedText>
-      ))}
+        {currentCard.content.map(({ letter, word }) => {
+          const trimmedWord = word.startsWith(letter) ? word.slice(1) : word; // slice removes the first letter of the word
+          return (
+            <ThemedText key={letter} style={{ color: '#fff', fontFamily: 'Poppins-Bold', fontSize:16 }}>
+              <Text style={{ color: '#E5FF00' }}>{letter}</Text>{trimmedWord}
+            </ThemedText>
+          );
+        })}
     </View>
   ) : (
     <View style={styles.squareContainer}>
@@ -51,7 +54,7 @@ const ACFlashcardResult = () => {
 
   const backContent = isAcronym ? (
     <View style={styles.squareContainer2}>
-      <ThemedText style={{ color: '#fff', textAlign: 'center', fontSize: 16 }}>
+      <ThemedText style={{ color: '#fff', textAlign: 'center', fontSize: 16 , fontFamily: 'Poppins-SemiBold'}}>
         Key Phrase: {currentCard.keyPhrase}
       </ThemedText>
     </View>
@@ -172,5 +175,5 @@ const styles = StyleSheet.create({
   backContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
   backText: { fontSize: 16, color: 'white', marginHorizontal: 5, marginTop: 5 },
   squareContainer: { width: '100%', backgroundColor: '#5C5C76', padding: 16, borderRadius: 10, borderColor: '#565656', borderWidth: 1, alignItems: 'center' },
-  squareContainer2: { width: '100%', backgroundColor: '#2E2E40', padding: 16, borderRadius: 10, borderColor: '#565656', borderWidth: 1, alignItems: 'center' }
+  squareContainer2: { width: '100%', backgroundColor: '#2E2E40', padding: 16, borderRadius: 10, borderColor: '#565656', borderWidth: 1, alignItems: 'center', height: '100%', justifyContent: 'center' }
 });
