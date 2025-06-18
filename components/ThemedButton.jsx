@@ -4,20 +4,25 @@ import React from 'react';
 function ThemedButton({ style, children, ...props }) {
   return (
     <Pressable
-      style={({ pressed }) => [styles.btn, pressed && styles.pressed, style]}
+      style={({ pressed }) => [
+        styles.btn,
+        style,
+        pressed && styles.pressed,
+      ]}
       {...props}
     >
-      {({ pressed }) => 
+      {({ pressed }) => (
         React.cloneElement(children, {
           style: [
             children.props.style,
-            { color: pressed ? '#B5B5FF' : children.props.style?.color }
-          ]
+            pressed && { color: '#B5B5FF' },
+          ],
         })
-      }
+      )}
     </Pressable>
   );
 }
+
 
 export default ThemedButton
 

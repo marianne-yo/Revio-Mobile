@@ -1,4 +1,3 @@
-// _layout.jsx of root app folder
 import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
@@ -7,7 +6,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { MusicProvider } from '../lib/context/MusicContext';
 import { auth } from '../lib/firebaseConfig'; // Import Firebase auth instance
 import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
-
+import { usePathname } from 'expo-router';
+import FloatingPlayer from '../components/FloatingPlayer';
+import MusicPlayerBar from '../components/MusicPlayerBar';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 const toastConfig = {
   success: (props) => (
     <BaseToast
@@ -116,6 +118,8 @@ const RootLayout = () => {
     return () => unsubscribe();
   }, []);
 
+    const pathname = usePathname();
+    const isFocusScreen = pathname.includes('/Focus');
 // This if block ensures that nothing is rendered until the
 // authentication state has been determined.
   if (!appReady) {
@@ -123,29 +127,30 @@ const RootLayout = () => {
     return null; 
   }
 
+
   return (
     <>
-      <MusicProvider>
-        <Stack screenOptions={{
-          headerStyle: { backgroundColor: 'blue' },
-          headerTintColor: "#ffffff",
-          backgroundColor: "red"
-        }}>
-        {/* Conditional Nav based on Auth State */}
-          {user ? (
-            // User is logged in and not null, navigate to dashboard or desired authenticated screen
-            <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-          ) : (
-            // User is not logged in, navigate to auth screens
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          )}
-          <Stack.Screen name="(flashcards)" options={{ headerShown: false }} />
-          <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
-          <Stack.Screen name="(modals)" options={{ headerShown: false }} />
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-        </Stack>
-        <Toast config={toastConfig} />
-      </MusicProvider>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <MusicProvider>
+          <Stack screenOptions={{
+            headerStyle: { backgroundColor: 'blue' },
+            headerTintColor: "#ffffff",
+            backgroundColor: "red"
+          }}>
+            {user ? (
+              <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+            ) : (
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            )}
+            <Stack.Screen name="(flashcards)" options={{ headerShown: false }} />
+            <Stack.Screen name="(reviewer)" options={{ headerShown: false }} />
+            <Stack.Screen name="(modals)" options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+          </Stack>
+
+          <Toast config={toastConfig} />
+        </MusicProvider>
+      </GestureHandlerRootView>
     </>
   );
 };

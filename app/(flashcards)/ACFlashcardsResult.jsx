@@ -9,6 +9,7 @@ import ThemedButton from '../../components/ThemedButton';
 import Spacer from '../../components/Spacer';
 import ThemedFlashcard from '../../components/ThemedFlashcard';
 import useCustomFonts from '../../hooks/useCustomFonts' //imported fonts
+import FloatingPlayer from '../../components/FloatingPlayer';
 
 const ACFlashcardResult = () => {
   const router = useRouter();
@@ -19,6 +20,8 @@ const ACFlashcardResult = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flashcards, setFlashcards] = useState([]);
+
+  const [intensePressed, setIntensePressed] = useState(false);
 
   useEffect(() => {
     if (parsedCard?.questions) {
@@ -61,38 +64,57 @@ const ACFlashcardResult = () => {
   );
 
   return (
-    <ThemedView style={styles.container}>
-      <View style={styles.backContainer}>
-        <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
-        <ThemedText style={styles.backText}>Back</ThemedText>
-      </View>
+    <View style={{flex: 1}}>
+      <ThemedView style={styles.container}>
+        <View style={styles.backContainer}>
+          <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
+          <ThemedText style={styles.backText}>Back</ThemedText>
+        </View>
 
-      <ThemedText style={styles.title}>{parsedCard?.title || 'Flashcard'}</ThemedText>
-      <ThemedText style={styles.subtext}>Tap to flip to reveal the answer</ThemedText>
+        <ThemedText style={styles.title}>{parsedCard?.title || 'Flashcard'}</ThemedText>
+        <ThemedText style={styles.subtext}>Tap to flip to reveal the answer</ThemedText>
 
-      <ThemedFlashcard frontContent={frontContent} backContent={backContent} />
+        <ThemedFlashcard frontContent={frontContent} backContent={backContent} />
 
-      <Spacer />
+        <Spacer />
 
-      <View style={styles.pagination}>
-        <Pressable onPress={() => setCurrentIndex((i) => Math.max(i - 1, 0))} disabled={currentIndex === 0}>
-          <Ionicons name="arrow-back-circle" size={40} color="#B5B5FF" />
-        </Pressable>
+        <View style={styles.pagination}>
+          <Pressable onPress={() => setCurrentIndex((i) => Math.max(i - 1, 0))} disabled={currentIndex === 0}>
+            <Ionicons name="arrow-back-circle" size={40} color="#B5B5FF" />
+          </Pressable>
 
-        <Spacer width={20} />
+          <Spacer width={20} />
 
-        <Pressable onPress={() => setCurrentIndex((i) => Math.min(i + 1, flashcards.length - 1))} disabled={currentIndex === flashcards.length - 1}>
-          <Ionicons name="arrow-forward-circle" size={40} color="#B5B5FF" />
-        </Pressable>
-      </View>
+          <Pressable onPress={() => setCurrentIndex((i) => Math.min(i + 1, flashcards.length - 1))} disabled={currentIndex === flashcards.length - 1}>
+            <Ionicons name="arrow-forward-circle" size={40} color="#B5B5FF" />
+          </Pressable>
+        </View>
 
-      <Spacer height={20} />
-      <View style={styles.actions}>
-        <ThemedButton style={styles.editBtn}><ThemedText style={styles.btnText}>Edit</ThemedText></ThemedButton>
-        <ThemedButton style={styles.intenseBtn}><ThemedText style={styles.intenseText}>Intense Mode</ThemedText></ThemedButton>
-        <ThemedButton style={styles.musicBtn}><Ionicons name="musical-notes" size={18} color="white" /></ThemedButton>
-      </View>
-    </ThemedView>
+        <Spacer height={20} />
+        <View style={styles.actions}>
+          <ThemedButton style={styles.editBtn}>
+            <ThemedText style={styles.btnText}>Edit</ThemedText>
+          </ThemedButton>
+          <Pressable
+            onPressIn={() => setIntensePressed(true)}
+            onPressOut={() => setIntensePressed(false)}
+            style={[
+              styles.intenseBtn,
+              intensePressed && { backgroundColor: '#F14C4C', borderColor: '#F14C4C' }
+            ]}
+          >
+            <ThemedText style={[
+              styles.intenseText,
+              intensePressed && { color: '#200448' }
+            ]}>
+              Intense Mode
+            </ThemedText>
+          </Pressable>
+          <FloatingPlayer mode='inline' />
+        </View>
+      </ThemedView>
+
+    </View>
   );
 };
 
@@ -126,12 +148,24 @@ const styles = StyleSheet.create({
     alignItems: 'center' 
   },
   actions: { flexDirection: 'row', 
-    justifyContent: 'space-between', 
+    justifyContent: 'space-evenly', 
     alignItems: 'center', 
-    width: '100%' 
+    width: '100%'
   },
-  editBtn: { backgroundColor: '#B5B5FF', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 12, width: '30%' },
-  btnText: { color: '#200448', fontFamily: 'Poppins-Bold', fontSize: 14, textAlign: 'center' },
+  editBtn: {
+    backgroundColor: '#B5B5FF',
+    padding: 12,
+    borderRadius: 12,
+    width: '25%',
+    alignItems: 'center',
+    marginRight: 5
+  },
+  btnText: {
+    color: '#200448',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 14,
+    textAlign: 'center',
+  },
   intenseBtn: { borderWidth: 1, borderColor: '#F14C4C', backgroundColor: 'transparent', paddingHorizontal: 12, paddingVertical: 10, borderRadius: 12, width: '40%' },
   intenseText: { color: '#fff', fontFamily: 'Poppins-Bold', fontSize: 14, textAlign: 'center' },
   musicBtn: { width: 44, height: 44, backgroundColor: '#B5B5FF', justifyContent: 'center', alignItems: 'center', borderRadius: 22 },

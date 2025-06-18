@@ -33,9 +33,7 @@ const Focus = () => {
         contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      {currentTrack && (
-        <MusicPlayerBar track={currentTrack} />
-      )}
+      {currentTrack && <MusicPlayerBar />}
     </ThemedView>
   );
 };

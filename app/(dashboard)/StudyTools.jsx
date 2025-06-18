@@ -11,6 +11,7 @@ import ThemedSecondaryButton from '../../components/ThemedSecondaryButton'
 import { Colors } from '../../constants/Colors'
 import { useRouter } from 'expo-router';
 import useCustomFonts from '../../hooks/useCustomFonts'
+import FloatingPlayer from '../../components/FloatingPlayer'
 // import { useMusic } from '../../lib/context/MusicContext';
 
 const StudyTools = () => {
@@ -121,6 +122,8 @@ const StudyTools = () => {
         
       </ThemedButton>
       <Spacer height={10}/>
+
+      <FloatingPlayer />
     </ThemedView>
   )
 }
@@ -163,5 +166,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     color: '#ffffff'
-  }
+  },
+  pressed: {
+  backgroundColor: '#200448', // fallback default, can be overridden per-button
+}
+
 })
