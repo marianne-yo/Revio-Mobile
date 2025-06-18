@@ -9,6 +9,7 @@ import ThemedButton from '../../components/ThemedButton';
 import Spacer from '../../components/Spacer';
 import ThemedFlashcard from '../../components/ThemedFlashcard';
 import useCustomFonts from '../../hooks/useCustomFonts' //imported fonts
+import FloatingPlayer from '../../components/FloatingPlayer';
 const TDFlashcardsResult = () => {
   const router = useRouter();
   const { file } = useLocalSearchParams();
@@ -19,6 +20,7 @@ const TDFlashcardsResult = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flashcards, setFlashcards] = useState([]);
 
+  const [intensePressed, setIntensePressed] = useState(false);
   useEffect(() => {
     if (parsed?.questions) {
       setFlashcards(parsed.questions);
@@ -40,39 +42,65 @@ const TDFlashcardsResult = () => {
   );
 
   return (
-    <ThemedView style={styles.container}>
-      <View style={styles.backContainer}>
-        <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
-        <ThemedText style={styles.backText}>Back</ThemedText>
-      </View>
+    <View style={{flex: 1}}>
+      <ThemedView style={styles.container}>
+        <View style={styles.backContainer}>
+          <Ionicons name="arrow-back" size={24} color="white" onPress={() => router.back()} />
+          <ThemedText style={styles.backText}>Back</ThemedText>
+        </View>
 
-      <ThemedText style={styles.title}>{parsed?.title || 'Terms & Definitions'}</ThemedText>
-      <Spacer height={10} />
-      <ThemedText style={styles.subtext}>Tap to flip between Term and Definition</ThemedText>
+        <ThemedText style={styles.title}>{parsed?.title || 'Terms & Definitions'}</ThemedText>
+        <Spacer height={10} />
+        <ThemedText style={styles.subtext}>Tap to flip between Term and Definition</ThemedText>
 
-      <ThemedFlashcard frontContent={frontContent} backContent={backContent} />
+        <ThemedFlashcard frontContent={frontContent} backContent={backContent} />
 
-      <Spacer height={20} />
+        <Spacer height={20} />
+      {/* next and prev buttons for flashcards */}
+        <View style={styles.pagination}>
+          <Pressable onPress={() => setCurrentIndex(i => Math.max(i - 1, 0))} disabled={currentIndex === 0}>
+            <Ionicons name="arrow-back-circle" size={50} color="#B5B5FF" />
+          </Pressable>
 
-      <View style={styles.pagination}>
-        <Pressable onPress={() => setCurrentIndex(i => Math.max(i - 1, 0))} disabled={currentIndex === 0}>
-          <Ionicons name="arrow-back-circle" size={40} color="#B5B5FF" />
-        </Pressable>
+          <Spacer width={20} />
 
+          <Pressable onPress={() => setCurrentIndex(i => Math.min(i + 1, flashcards.length - 1))} disabled={currentIndex === flashcards.length - 1}>
+            <Ionicons name="arrow-forward-circle" size={50} color="#B5B5FF" />
+          </Pressable>
+        </View>
         <Spacer width={20} />
-
-        <Pressable onPress={() => setCurrentIndex(i => Math.min(i + 1, flashcards.length - 1))} disabled={currentIndex === flashcards.length - 1}>
-          <Ionicons name="arrow-forward-circle" size={40} color="#B5B5FF" />
-        </Pressable>
-      </View>
-    </ThemedView>
+        {/* controls */}
+        <View style={styles.actions}>
+          <ThemedButton style={styles.editBtn}>
+            <ThemedText style={styles.btnText}>Edit</ThemedText>
+          </ThemedButton>
+          <Pressable
+            onPressIn={() => setIntensePressed(true)}
+            onPressOut={() => setIntensePressed(false)}
+            style={[
+              styles.intenseBtn,
+              intensePressed && { backgroundColor: '#F14C4C', borderColor: '#F14C4C' }
+            ]}
+          >
+            <ThemedText style={[
+              styles.intenseText,
+              intensePressed && { color: '#200448' }
+            ]}>
+              Intense Mode
+            </ThemedText>
+          </Pressable>
+          <FloatingPlayer mode='inline' />
+        </View>
+      </ThemedView>
+      
+    </View>
   );
 };
 
 export default TDFlashcardsResult;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
+  container: { flex: 1, padding: 20, justifyContent: 'center', alignContent: 'center' },
   title: { fontSize: 26, fontFamily: 'Poppins-Bold', marginBottom: 6, color: '#fff' },
   subtext: { fontSize: 12, color: '#999', fontFamily: 'Poppins-Regular' },
   backContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
@@ -101,5 +129,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+    actions: { flexDirection: 'row', 
+    justifyContent: 'space-evenly', 
+    alignItems: 'center', 
+    width: '100%'
+  },
+  editBtn: {
+    backgroundColor: '#B5B5FF',
+    padding: 12,
+    borderRadius: 12,
+    width: '25%',
+    alignItems: 'center',
+    marginRight: 5
+  },
+  btnText: {
+    color: '#200448',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  intenseBtn: { borderWidth: 1, borderColor: '#F14C4C', backgroundColor: 'transparent', paddingHorizontal: 12, paddingVertical: 10, borderRadius: 12, width: '40%' },
+  intenseText: { color: '#fff', fontFamily: 'Poppins-Bold', fontSize: 14, textAlign: 'center' },
+  presseableBtn:{
+    width: '50%'
   }
 });
