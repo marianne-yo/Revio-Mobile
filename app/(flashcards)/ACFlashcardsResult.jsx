@@ -147,7 +147,12 @@ const ACFlashcardResult = () => {
             <ThemedText style={styles.btnText}>Edit</ThemedText>
           </ThemedButton>
           <Pressable
-            onPress={() => router.push("/(flashcards)/ACIntenseMode")}
+            onPress={() =>
+              router.push({
+                pathname: "/(flashcards)/ACIntenseMode",
+                params: { file: JSON.stringify({ cards: flashcards }) }, // ✅ All cards
+              })
+            }
             onPressIn={() => setIntensePressed(true)}
             onPressOut={() => setIntensePressed(false)}
             style={[styles.intenseBtn, intensePressed && { backgroundColor: '#F14C4C', borderColor: '#F14C4C' }]}

@@ -7,8 +7,8 @@ import { MusicProvider } from '../lib/context/MusicContext';
 import { auth } from '../lib/firebaseConfig'; // Import Firebase auth instance
 import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
 import { usePathname } from 'expo-router';
-import FloatingPlayer from '../components/FloatingPlayer';
-import MusicPlayerBar from '../components/MusicPlayerBar';
+
+import 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 const toastConfig = {
   success: (props) => (

@@ -1,24 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Pressable, Text, Modal, Animated } from 'react-native'; //a modal renders an overlay popup anywhere in app
+import { View, StyleSheet, Pressable, Text, Modal, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import Spacer from '../components/Spacer';
 
-const POMODORO_TIME = 25 * 60;
-const SHORT_BREAK = 5 * 60;
-
-const IntenseTimer = () => {
-  const [isRunning, setIsRunning] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(POMODORO_TIME);
-  const [isBreak, setIsBreak] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false); {/* the ModalVisible controls whether the modal is shown */}
-  const [modalMessage, setModalMessage] = useState(''); 
-  const intervalRef = useRef(null);
+const IntenseTimer = ({ flashcards = [] }) => {
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
+  const [modalMessage, setModalMessage] = useState("Time's up! Intense mode complete");
+  const [modalIcon, setModalIcon] = useState('alarm-outline');
   const scaleAnim = useRef(new Animated.Value(0.7)).current;
-  const [modalIcon, setModalIcon] = useState('timer-outline'); // default icon
 
+  const totalTime = flashcards.length * 30;
+  const progress = totalTime === 0 ? 0 : (totalTime - timeLeft) / totalTime;
 
+  useEffect(() => {
+    setTimeLeft(flashcards.length * 30);
+  }, [flashcards]);
 
+  useEffect(() => {
+    let interval;
+    if (isRunning && timeLeft > 0) {
+      interval = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            showModal();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, timeLeft]);
+
+  const showModal = () => {
+    setModalVisible(true);
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      friction: 5,
+    }).start();
+  };
+
+  const handleSkip = () => {
+    setTimeLeft(0);
+    setIsRunning(false);
+    showModal();
+  };
 
   return (
     <View style={styles.container}>
@@ -49,16 +80,10 @@ const IntenseTimer = () => {
       </View>
 
       <Spacer height={10} />
-      
+
       {/* Progress bar */}
       <View style={styles.progressBar}>
-        <View
-          style={[
-            styles.progressFill,
-            { flex: progress },
-            isBreak && pomoCount !== 0 && { backgroundColor: '#FFD700' }
-          ]}
-        />
+        <View style={[styles.progressFill, { flex: progress }]} />
         <View style={{ flex: 1 - progress }} />
       </View>
     </View>
