@@ -7,15 +7,46 @@
       "reviewers": [
         {
           "id": "ac1",
-          "title": "Phases in UP",
-          "content": [
-            { "letter": "I", "word": "Inception" },
-            { "letter": "E", "word": "Elaboration" },
-            { "letter": "C", "word": "Construction" },
-            { "letter": "T", "word": "Transition" },
-            { "letter": "P", "word": "Production" }
-          ],
-          "keyPhrase": "Imagine Every Challenge Turns Possible"
+          "title": "Acronym Flashcards Collection",
+          "cards": [
+            {
+              "id": "ac1-q1",
+              "title": "Phases in UP",
+              "content": [
+                { "letter": "I", "word": "Inception" },
+                { "letter": "E", "word": "Elaboration" },
+                { "letter": "C", "word": "Construction" },
+                { "letter": "T", "word": "Transition" },
+                { "letter": "P", "word": "Production" }
+              ],
+              "keyPhrase": "Imagine Every Challenge Turns Possible"
+            },
+            {
+              "id": "ac1-q2",
+              "title": "OSI Model",
+              "content": [
+                { "letter": "P", "word": "Physical" },
+                { "letter": "D", "word": "Data Link" },
+                { "letter": "N", "word": "Network" },
+                { "letter": "T", "word": "Transport" },
+                { "letter": "S", "word": "Session" },
+                { "letter": "P", "word": "Presentation" },
+                { "letter": "A", "word": "Application" }
+              ],
+              "keyPhrase": "Please Do Not Touch Steve’s Pet Alligator"
+            },
+            {
+              "id": "ac1-q3",
+              "title": "Software Testing Levels",
+              "content": [
+                { "letter": "U", "word": "Unit Testing" },
+                { "letter": "I", "word": "Integration Testing" },
+                { "letter": "S", "word": "System Testing" },
+                { "letter": "A", "word": "Acceptance Testing" }
+              ],
+              "keyPhrase": "Ugly Iguanas Slap Apples"
+            }
+          ]
         }
       ]
     },
