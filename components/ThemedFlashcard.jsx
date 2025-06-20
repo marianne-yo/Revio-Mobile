@@ -20,7 +20,7 @@ const ThemedFlashcard = ({ frontContent, backContent, height = 245, width = '100
     backfaceVisibility: 'hidden',
     position: 'absolute',
     width: '100%',
-    height: '100%',
+    height: '120%',
   }));
 
   const backAnimatedStyle = useAnimatedStyle(() => ({
@@ -33,7 +33,7 @@ const ThemedFlashcard = ({ frontContent, backContent, height = 245, width = '100
     backfaceVisibility: 'hidden',
     position: 'absolute',
     width: '100%',
-    height: '100%',
+    height: '120%',
     backgroundColor: '#5C5C76',
   }));
 
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     borderColor: '#565656',
     borderWidth: 1,
     padding: 16,
+    maxHeight: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
   },
